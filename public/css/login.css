@@ -1,0 +1,119 @@
+/* Login Page Specific Styles */
+
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Logo Size for Login Page */
+.logo-header {
+    height: 48px;
+    width: 48px;
+    object-fit: contain;
+}
+
+/* Material Icons Configuration */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Login Card Styles */
+.login-card {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark .login-card {
+    background: #252d35;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+}
+
+/* Form Input Focus Effects */
+input:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: rgba(45, 107, 108, 0.2);
+    border-color: #2d6b6c;
+}
+
+/* Button Hover Effects */
+button[type="submit"] {
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Social Button Hover */
+.social-button {
+    transition: all 0.2s ease;
+}
+
+.social-button:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.dark .social-button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Background Blur Effects */
+.bg-blur {
+    backdrop-filter: blur(100px);
+}
+
+/* Trust Indicator Animation */
+.trust-indicator {
+    animation: fadeIn 0.8s ease-out 0.3s forwards;
+    opacity: 0;
+}
+
+/* Password Toggle Button */
+.password-toggle {
+    transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+    color: #2d6b6c;
+}
+
+/* Link Styles */
+a {
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Smooth Transitions */
+* {
+    transition-property: background-color, border-color, color;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

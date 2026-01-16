@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>NutriLens - Advanced Habit & Nutrition Tracking</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/home.css">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2d6b6c",
+                        "background-light": "#ffffff",
+                        "background-dark": "#1d242a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#131616] dark:text-white transition-colors duration-300">
+    <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <!-- Navigation -->
+            <header class="flex items-center justify-between border-b border-solid border-[#f1f3f3] dark:border-white/10 px-6 md:px-20 py-4 sticky top-0 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3">
+                         <img src="assets/logo.png" alt="NutriLens Logo" class="h-12 w-12 object-contain"> 
+                        <h2 class="text-[#131616] dark:text-white text-xl font-extrabold tracking-tight">NutriLens</h2>
+                    </a>
+                </div>
+                <div class="hidden md:flex flex-1 justify-center gap-10">
+                    <a class="text-[#131616] dark:text-white/80 text-sm font-semibold hover:text-primary transition-colors" href="#features">Features</a>
+                    <a class="text-[#131616] dark:text-white/80 text-sm font-semibold hover:text-primary transition-colors" href="#science">Science</a>
+                    <a class="text-[#131616] dark:text-white/80 text-sm font-semibold hover:text-primary transition-colors" href="#pricing">Pricing</a>
+                </div>
+                <div class="flex gap-3 items-center">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                        <span class="material-symbols-outlined dark-mode-icon hidden dark:block">light_mode</span>
+                        <span class="material-symbols-outlined light-mode-icon dark:hidden">dark_mode</span>
+                    </button>
+                    <a href="login.html" class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-[#f1f3f3] dark:bg-white/10 text-[#131616] dark:text-white text-sm font-bold tracking-tight hover:bg-gray-200 dark:hover:bg-white/20 transition-all">
+                        <span>Login</span>
+                    </a>
+                    <a href="register.html" class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold tracking-tight hover:opacity-90 transition-all">
+                        <span>Register</span>
+                    </a>
+                </div>
+            </header>
+
+            <!-- Hero Section -->
+            <main class="flex-1">
+                <div class="max-w-[1200px] mx-auto px-6 py-12 md:py-24">
+                    <div class="flex flex-col md:flex-row gap-12 items-center">
+                        <div class="flex flex-col gap-8 md:w-1/2 animate-fade-in">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full w-fit">
+                                <span class="material-symbols-outlined text-sm">auto_awesome</span>
+                                <span class="text-xs font-bold uppercase tracking-wider">AI-Powered Wellness</span>
+                            </div>
+                            <h1 class="text-[#131616] dark:text-white text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-[-0.04em]">
+                                Track your habits, <span class="text-primary">analyze your nutrition.</span>
+                            </h1>
+                            <p class="text-[#6c7e7f] dark:text-white/60 text-lg md:text-xl font-medium leading-relaxed max-w-[540px]">
+                                A sophisticated approach to wellness through data-driven insights and effortless habit formation. Built for the modern biohacker.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="register.html" class="flex min-w-[180px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 bg-primary text-white text-base font-bold tracking-tight hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-primary/20">
+                                    Get Started Free
+                                </a>
+                                <button class="flex min-w-[180px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 border-2 border-[#dee3e3] dark:border-white/10 text-[#131616] dark:text-white text-base font-bold tracking-tight hover:bg-gray-50 dark:hover:bg-white/5 transition-all">
+                                    Watch Demo
+                                </button>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 w-full">
+                            <div class="relative group">
+                                <div class="absolute -inset-4 bg-primary/5 rounded-[2rem] blur-2xl group-hover:bg-primary/10 transition-colors"></div>
+                                <div class="relative bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-2xl shadow-2xl border border-white/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAjeEahdAAUz4ltFD7N5HPXxEPEiObnukOPfN0gWIZMnHdHkL3SlBya8WN-4aa5Ka-zmvm32wUguQcoxOKBXEKTEdapki-IUS_ocJiXxAEdYmyeujD6JFVadll_ArRqlvmlJicYN3Js95YU6OiqWQXaOcVStVz4Hy1rBQL-OpR45doBhckZqgCOSL7W2ToINVQ8MA1ZlcrhUdZoUeX1t7p6tDFFk3QK_SxXDnWBZh7G24QQyV_bC69QnubgInJzIRzNP9Bg-bpPbcl6");'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Section -->
+                <section id="features" class="max-w-[1200px] mx-auto px-6 py-20">
+                    <div class="flex flex-col gap-4 mb-16">
+                        <h2 class="text-primary text-sm font-bold uppercase tracking-[0.2em]">The NutriLens System</h2>
+                        <h3 class="text-[#131616] dark:text-white text-3xl md:text-4xl font-extrabold tracking-tight">Everything you need for a <br/>high-performance lifestyle</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="flex flex-col gap-6 p-8 rounded-2xl bg-[#f8fafa] dark:bg-white/5 border border-[#dee3e3] dark:border-white/10 subtle-shadow hover:border-primary/50 transition-all group hover:transform hover:scale-[1.02]">
+                            <div class="size-12 rounded-xl bg-white dark:bg-white/10 flex items-center justify-center shadow-sm text-primary">
+                                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">analytics</span>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <h4 class="text-[#131616] dark:text-white text-xl font-bold leading-tight tracking-tight">Habit Tracking</h4>
+                                <p class="text-[#6c7e7f] dark:text-white/60 text-base font-medium leading-relaxed">
+                                    Visualize your consistency with intuitive streaks and behavioral pattern analysis. Spot trends before they become setbacks.
+                                </p>
+                            </div>
+                            <div class="mt-auto pt-4 flex items-center gap-2 text-primary font-bold text-sm cursor-pointer">
+                                Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-6 p-8 rounded-2xl bg-[#f8fafa] dark:bg-white/5 border border-[#dee3e3] dark:border-white/10 subtle-shadow hover:border-primary/50 transition-all group hover:transform hover:scale-[1.02]">
+                            <div class="size-12 rounded-xl bg-white dark:bg-white/10 flex items-center justify-center shadow-sm text-primary">
+                                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">restaurant</span>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <h4 class="text-[#131616] dark:text-white text-xl font-bold leading-tight tracking-tight">Nutrition Analysis</h4>
+                                <p class="text-[#6c7e7f] dark:text-white/60 text-base font-medium leading-relaxed">
+                                    AI-powered food logging. Just snap a photo or describe your meal for precise nutrient data and macro tracking in seconds.
+                                </p>
+                            </div>
+                            <div class="mt-auto pt-4 flex items-center gap-2 text-primary font-bold text-sm cursor-pointer">
+                                Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-6 p-8 rounded-2xl bg-[#f8fafa] dark:bg-white/5 border border-[#dee3e3] dark:border-white/10 subtle-shadow hover:border-primary/50 transition-all group hover:transform hover:scale-[1.02]">
+                            <div class="size-12 rounded-xl bg-white dark:bg-white/10 flex items-center justify-center shadow-sm text-primary">
+                                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">lightbulb</span>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <h4 class="text-[#131616] dark:text-white text-xl font-bold leading-tight tracking-tight">Daily Insights</h4>
+                                <p class="text-[#6c7e7f] dark:text-white/60 text-base font-medium leading-relaxed">
+                                    Receive personalized health tips tailored to your unique biology, recent activity, and long-term wellness goals.
+                                </p>
+                            </div>
+                            <div class="mt-auto pt-4 flex items-center gap-2 text-primary font-bold text-sm cursor-pointer">
+                                Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CTA Section -->
+                <section id="pricing" class="max-w-[1200px] mx-auto px-6 py-20">
+                    <div class="bg-primary rounded-[2.5rem] p-8 md:p-20 text-center relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                        <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
+                        <div class="relative z-10 max-w-[720px] mx-auto flex flex-col items-center gap-8">
+                            <h2 class="text-white text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
+                                Ready to transform your health?
+                            </h2>
+                            <p class="text-white/80 text-lg md:text-xl font-medium">
+                                Join 50,000+ users tracking their way to a better life. Start your 14-day free trial today.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                                <a href="register.html" class="flex min-w-[200px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 bg-white text-primary text-base font-bold tracking-tight hover:bg-gray-50 transition-all shadow-xl">
+                                    Get Started for Free
+                                </a>
+                                <button class="flex min-w-[200px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 border-2 border-white/20 text-white text-base font-bold tracking-tight hover:bg-white/10 transition-all">
+                                    Contact Sales
+                                </button>
+                            </div>
+                            <p class="text-white/60 text-sm font-medium">No credit card required. Cancel anytime.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Footer -->
+            <footer class="max-w-[1200px] mx-auto w-full px-6 py-12 border-t border-[#f1f3f3] dark:border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <img src="assets/logo.png" alt="NutriLens" class="logo-footer">
+                    <span class="text-sm font-bold tracking-tight">NutriLens</span>
+                </div>
+                <div class="flex gap-8 text-sm font-semibold text-[#6c7e7f] dark:text-white/40">
+                    <a class="hover:text-primary transition-colors" href="#">Privacy</a>
+                    <a class="hover:text-primary transition-colors" href="#">Terms</a>
+                    <a class="hover:text-primary transition-colors" href="#">Cookies</a>
+                    <a class="hover:text-primary transition-colors" href="#">Support</a>
+                </div>
+                <p class="text-sm text-[#6c7e7f] dark:text-white/40 font-medium">© 2024 NutriLens Inc. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+    <script src="/js/main.js"></script>
+</body>
+</html>

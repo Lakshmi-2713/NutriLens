@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NutriLens Dashboard Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6bc78a",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#141e18",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .radial-progress-ring {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#131614] dark:text-white min-h-screen flex">
+<!-- Persistent Sidebar -->
+<aside class="w-64 border-r border-[#dee3df] dark:border-[#2d3a31] bg-white dark:bg-[#1a261f] flex flex-col h-screen sticky top-0">
+<div class="p-6 flex flex-col h-full justify-between">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3">
+<div class="bg-primary size-10 rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined font-bold">lens_blur</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#131614] dark:text-white text-base font-bold leading-none">NutriLens</h1>
+<p class="text-[#6b8072] text-xs font-medium">Wellness OS</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-bold" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6b8072] hover:bg-background-light dark:hover:bg-[#2d3a31] transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">restaurant</span>
+<span class="text-sm font-semibold">Meal Plans</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6b8072] hover:bg-background-light dark:hover:bg-[#2d3a31] transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">auto_stories</span>
+<span class="text-sm font-semibold">Habit Library</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6b8072] hover:bg-background-light dark:hover:bg-[#2d3a31] transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">bar_chart</span>
+<span class="text-sm font-semibold">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6b8072] hover:bg-background-light dark:hover:bg-[#2d3a31] transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-sm font-semibold">Settings</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<button class="w-full bg-primary hover:bg-opacity-90 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span class="text-sm">New Habit</span>
+</button>
+<div class="flex items-center gap-3 p-2 border-t border-[#dee3df] dark:border-[#2d3a31] pt-4">
+<div class="size-9 rounded-full bg-cover bg-center" data-alt="Portrait of a healthy woman smiling" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCK2fBgUoPcABSWzdyH_oGIXhhq28KRMLsB0q3SpAu1khcXuErum0EBA0i3t07U_eMD80_VlHVXhxAdjKsmgU45yq3ZiRk_KQJGxh-63qHMUaCvL2XhYVoVYhQfkwRHBps5Dq1TVZ9ca-AWw6BYqa7c9dgfbUsx95L3AjageZyrjjlSQpditoCnmWeRwsiRspFqKUviwvVZiIxR4qpL77iJNhqDBm0YOLwX4c9uGrIAuUQXN-WlQoFI6JI7EEmR1Uo10Nd8t63lvXxr')"></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-sm font-bold truncate">Alex Rivera</p>
+<p class="text-[10px] text-[#6b8072] uppercase font-bold tracking-wider">Premium Member</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Top Nav Bar -->
+<header class="h-16 border-b border-[#dee3df] dark:border-[#2d3a31] bg-white/80 dark:bg-[#1a261f]/80 backdrop-blur-md px-8 flex items-center justify-between sticky top-0 z-10">
+<div class="flex items-center gap-4 flex-1">
+<h2 class="text-lg font-bold tracking-tight">Dashboard Overview</h2>
+<div class="max-w-md w-full relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#6b8072] text-[20px]">search</span>
+<input class="w-full bg-background-light dark:bg-[#2d3a31] border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-[#6b8072]" placeholder="Search habits, meals, or data..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="size-10 rounded-lg bg-background-light dark:bg-[#2d3a31] flex items-center justify-center text-[#6b8072] hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-[#1a261f]"></span>
+</button>
+<div class="h-8 w-px bg-[#dee3df] dark:border-[#2d3a31]"></div>
+<div class="flex flex-col items-end">
+<span class="text-xs font-bold text-[#6b8072]">DAILY STREAK</span>
+<span class="text-sm font-extrabold text-primary flex items-center gap-1">12 DAYS <span class="material-symbols-outlined text-[16px]">local_fire_department</span></span>
+</div>
+</div>
+</header>
+<div class="p-8 space-y-8">
+<!-- Hero Header -->
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight">Welcome back, Alex!</h1>
+<p class="text-[#6b8072] font-medium mt-1">You've completed 75% of your health goals today. Keep it up!</p>
+</div>
+<!-- Dashboard Bento Grid -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Habit Progress - 7 Day Calendar (Full Width top) -->
+<div class="col-span-12 bg-white dark:bg-[#1a261f] p-6 rounded-2xl border border-[#dee3df] dark:border-[#2d3a31] shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold">Weekly Consistency</h3>
+<div class="flex gap-2">
+<button class="p-1 rounded-md hover:bg-background-light dark:hover:bg-[#2d3a31]"><span class="material-symbols-outlined">chevron_left</span></button>
+<span class="text-sm font-bold self-center px-2">May 12 - May 18</span>
+<button class="p-1 rounded-md hover:bg-background-light dark:hover:bg-[#2d3a31]"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-4">
+<!-- Monday -->
+<div class="flex flex-col items-center gap-3 p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30">
+<span class="text-xs font-bold text-[#6b8072]">MON</span>
+<div class="size-12 rounded-full border-4 border-primary flex items-center justify-center text-primary bg-primary/10">
+<span class="material-symbols-outlined font-bold">check</span>
+</div>
+<span class="text-[10px] font-extrabold text-primary uppercase">100%</span>
+</div>
+<!-- Tuesday -->
+<div class="flex flex-col items-center gap-3 p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30">
+<span class="text-xs font-bold text-[#6b8072]">TUE</span>
+<div class="size-12 rounded-full border-4 border-primary flex items-center justify-center text-primary bg-primary/10">
+<span class="material-symbols-outlined font-bold">check</span>
+</div>
+<span class="text-[10px] font-extrabold text-primary uppercase">100%</span>
+</div>
+<!-- Wednesday -->
+<div class="flex flex-col items-center gap-3 p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30">
+<span class="text-xs font-bold text-[#6b8072]">WED</span>
+<div class="size-12 rounded-full border-4 border-primary/40 flex items-center justify-center text-primary/40">
+<span class="material-symbols-outlined font-bold">check</span>
+</div>
+<span class="text-[10px] font-extrabold text-[#6b8072] uppercase">60%</span>
+</div>
+<!-- Thursday (Today) -->
+<div class="flex flex-col items-center gap-3 p-3 rounded-xl bg-primary text-white ring-4 ring-primary/20">
+<span class="text-xs font-bold opacity-80">THU</span>
+<div class="size-12 rounded-full border-4 border-white/40 flex items-center justify-center">
+<span class="text-sm font-black">75%</span>
+</div>
+<span class="text-[10px] font-extrabold uppercase">Today</span>
+</div>
+<!-- Friday -->
+<div class="flex flex-col items-center gap-3 p-3 rounded-xl">
+<span class="text-xs font-bold text-[#6b8072]">FRI</span>
+<div class="size-12 rounded-full border-4 border-[#dee3df] dark:border-[#2d3a31]"></div>
+<span class="text-[10px] font-extrabold text-[#6b8072] uppercase">-</span>
+</div>
+<!-- Saturday -->
+<div class="flex flex-col items-center gap-3 p-3 rounded-xl">
+<span class="text-xs font-bold text-[#6b8072]">SAT</span>
+<div class="size-12 rounded-full border-4 border-[#dee3df] dark:border-[#2d3a31]"></div>
+<span class="text-[10px] font-extrabold text-[#6b8072] uppercase">-</span>
+</div>
+<!-- Sunday -->
+<div class="flex flex-col items-center gap-3 p-3 rounded-xl">
+<span class="text-xs font-bold text-[#6b8072]">SUN</span>
+<div class="size-12 rounded-full border-4 border-[#dee3df] dark:border-[#2d3a31]"></div>
+<span class="text-[10px] font-extrabold text-[#6b8072] uppercase">-</span>
+</div>
+</div>
+</div>
+<!-- Nutrition Analysis Card -->
+<div class="col-span-12 lg:col-span-5 bg-white dark:bg-[#1a261f] p-6 rounded-2xl border border-[#dee3df] dark:border-[#2d3a31] shadow-sm flex flex-col justify-between">
+<div>
+<h3 class="text-lg font-bold mb-1">Nutrition Analysis</h3>
+<p class="text-sm text-[#6b8072] mb-6">Daily Macro breakdown</p>
+</div>
+<div class="relative flex justify-center items-center py-4">
+<svg class="size-48" viewbox="0 0 100 100">
+<!-- Protein Circle (Outer) -->
+<circle class="dark:stroke-[#2d3a31]" cx="50" cy="50" fill="transparent" r="45" stroke="#dee3df" stroke-width="8"></circle>
+<circle class="radial-progress-ring" cx="50" cy="50" fill="transparent" r="45" stroke="#6bc78a" stroke-dasharray="282.7" stroke-dashoffset="70" stroke-linecap="round" stroke-width="8"></circle>
+<!-- Carbs Circle (Middle) -->
+<circle class="dark:stroke-[#2d3a31]" cx="50" cy="50" fill="transparent" r="35" stroke="#dee3df" stroke-width="8"></circle>
+<circle class="radial-progress-ring" cx="50" cy="50" fill="transparent" r="35" stroke="#80C8E5" stroke-dasharray="219.9" stroke-dashoffset="65" stroke-linecap="round" stroke-width="8"></circle>
+<!-- Fats Circle (Inner) -->
+<circle class="dark:stroke-[#2d3a31]" cx="50" cy="50" fill="transparent" r="25" stroke="#dee3df" stroke-width="8"></circle>
+<circle class="radial-progress-ring" cx="50" cy="50" fill="transparent" r="25" stroke="#fbc02d" stroke-dasharray="157" stroke-dashoffset="47" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-2xl font-black">1,640</span>
+<span class="text-[10px] text-[#6b8072] font-bold uppercase tracking-widest">KCAL LEFT</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-6">
+<div class="p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30 border border-transparent hover:border-primary/20 transition-all">
+<p class="text-[10px] font-bold text-primary uppercase">Protein</p>
+<p class="text-sm font-black">94/140g</p>
+</div>
+<div class="p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30 border border-transparent hover:border-[#80C8E5]/20 transition-all">
+<p class="text-[10px] font-bold text-[#80C8E5] uppercase">Carbs</p>
+<p class="text-sm font-black">180/220g</p>
+</div>
+<div class="p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30 border border-transparent hover:border-yellow-400/20 transition-all">
+<p class="text-[10px] font-bold text-yellow-500 uppercase">Fats</p>
+<p class="text-sm font-black">52/70g</p>
+</div>
+</div>
+</div>
+<!-- Active Habits Checklist -->
+<div class="col-span-12 lg:col-span-7 bg-white dark:bg-[#1a261f] p-6 rounded-2xl border border-[#dee3df] dark:border-[#2d3a31] shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold">Active Habits</h3>
+<button class="text-primary text-xs font-bold hover:underline">View All</button>
+</div>
+<div class="space-y-3 flex-1 overflow-y-auto pr-1">
+<!-- Habit Item 1 -->
+<div class="flex items-center gap-4 p-4 rounded-xl border border-[#dee3df] dark:border-[#2d3a31] group hover:border-primary transition-all">
+<div class="size-6 rounded-md border-2 border-primary bg-primary text-white flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold line-through text-[#6b8072]">Drink 2.5L Water</h4>
+<p class="text-[11px] text-[#6b8072] font-medium">Daily Goal: 2,500ml • Current: 2,600ml</p>
+</div>
+<span class="material-symbols-outlined text-[#6b8072] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">more_vert</span>
+</div>
+<!-- Habit Item 2 -->
+<div class="flex items-center gap-4 p-4 rounded-xl border border-[#dee3df] dark:border-[#2d3a31] group hover:border-primary transition-all">
+<div class="size-6 rounded-md border-2 border-[#dee3df] dark:border-[#2d3a31] hover:border-primary cursor-pointer"></div>
+<div class="flex-1">
+<h4 class="text-sm font-bold">15 Min Mindfulness Meditation</h4>
+<p class="text-[11px] text-[#6b8072] font-medium">Morning Routine • 5 Day Streak</p>
+</div>
+<span class="material-symbols-outlined text-[#6b8072] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">more_vert</span>
+</div>
+<!-- Habit Item 3 -->
+<div class="flex items-center gap-4 p-4 rounded-xl border border-[#dee3df] dark:border-[#2d3a31] group hover:border-primary transition-all">
+<div class="size-6 rounded-md border-2 border-[#dee3df] dark:border-[#2d3a31] hover:border-primary cursor-pointer"></div>
+<div class="flex-1">
+<h4 class="text-sm font-bold">Post-Lunch Walk (20 min)</h4>
+<p class="text-[11px] text-[#6b8072] font-medium">Active Habit • Optimal for Digestion</p>
+</div>
+<span class="material-symbols-outlined text-[#6b8072] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">more_vert</span>
+</div>
+<!-- Habit Item 4 -->
+<div class="flex items-center gap-4 p-4 rounded-xl border border-[#dee3df] dark:border-[#2d3a31] group hover:border-primary transition-all">
+<div class="size-6 rounded-md border-2 border-primary bg-primary text-white flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold line-through text-[#6b8072]">Daily Vitamin Intake</h4>
+<p class="text-[11px] text-[#6b8072] font-medium">Omega 3, Vitamin D, Magnesium</p>
+</div>
+<span class="material-symbols-outlined text-[#6b8072] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">more_vert</span>
+</div>
+</div>
+</div>
+<!-- Meal Plan Section -->
+<div class="col-span-12 bg-white dark:bg-[#1a261f] p-6 rounded-2xl border border-[#dee3df] dark:border-[#2d3a31] shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-lg font-bold">Today's Meal Plan</h3>
+<p class="text-sm text-[#6b8072]">Balanced nutrition for performance</p>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary/20 transition-colors">Adjust Plan</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<!-- Breakfast -->
+<div class="flex flex-col gap-3 group">
+<div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-cover bg-center" data-alt="Healthy oatmeal bowl with fruits and nuts" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuASu72XKq_TLrSI1AgkEjZjZvLMLuQbos96y4rdKUwK5U8__NeWTJyKImUqL-VRokk700wbz0H7tmoCgumxv2iE0XdKSCZUyspg5o2yeZCkhWvUPP1s2ohDHc-Rk-ET4HUf19EGxg2HTG8FRIKnFDOpsTdPbgP0L-8w28RfC4-Nt6mdnGC7zsZV2gfAe2Gnvxi9su86Rywsd9pdbakPp_yL9VmIG5It6Isq8WnUU7Wy5ZXJOBWkTZLyNmCz12WR6fuWqXuA2ZjW14Fz')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-white/90 text-black text-[10px] font-bold py-1.5 rounded-lg w-full">View Recipe</button>
+</div>
+<span class="absolute top-2 right-2 bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full">DONE</span>
+</div>
+<div>
+<p class="text-[10px] font-extrabold text-[#6b8072] uppercase tracking-wider">Breakfast</p>
+<h4 class="text-sm font-bold">Berry &amp; Oat Bowl</h4>
+<p class="text-[11px] text-[#6b8072] font-medium">340 kcal • 15g Protein</p>
+</div>
+</div>
+<!-- Lunch -->
+<div class="flex flex-col gap-3 group">
+<div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-cover bg-center" data-alt="A fresh Mediterranean salad with chicken and vegetables" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChYLteDVYsdVe1lJ-NrzALEdI5-Q6rgyxoe7iOv7Cn23bmClNyJoqOiz4jdVo1sogSqTT4x6st_SqZV-77_EI8xau5O9S3VOOlooQoRhZ7oByUK3XUwBpwzDXKSP7-p4Pt8WQQjMlYsyJ1Hi_P41pm81QfmunXOhKMVug2iCeHshAmnHYWUTqkYLKx47aPlZ05SK2HjAiulowY7Hk0ZVd0Q_Iymc2bdEvBFqvBmNfdKRVPPYcT_wRQpGFlKL7HLE-aRUOU8arlwdXS')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-white/90 text-black text-[10px] font-bold py-1.5 rounded-lg w-full">View Recipe</button>
+</div>
+<span class="absolute top-2 right-2 bg-blue-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">EATING NOW</span>
+</div>
+<div>
+<p class="text-[10px] font-extrabold text-[#6b8072] uppercase tracking-wider">Lunch</p>
+<h4 class="text-sm font-bold">Mediterranean Salad</h4>
+<p class="text-[11px] text-[#6b8072] font-medium">520 kcal • 32g Protein</p>
+</div>
+</div>
+<!-- Dinner -->
+<div class="flex flex-col gap-3 group">
+<div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-cover bg-center" data-alt="Grilled salmon with asparagus and quinoa" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCWnr0KhEnqQX-zyKx5jruJAM7DXWu1NEmtg6QMuP-IVXeKoRd3Ic9G52blpbnCgY5M9R80tpMMMUESikFq5WCjhEyPMgNA9imQw9UPPPv72JVHL9ypoUhQOVySSYk6l5IoyRLEyHm-V8TRr-GsWqOXgVOxXL1qTc-hTLnrgOkZ8v9yWhwArO_3RoIjAJPnK_-miCH93kiyT8pHYAlzy2z-8JMdHG8XC2R4kZ-JSFrT0bcuN1kyrwUz1NXqAM1Nv5t0cqA1ikvgdQ-q')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-white/90 text-black text-[10px] font-bold py-1.5 rounded-lg w-full">View Recipe</button>
+</div>
+</div>
+<div>
+<p class="text-[10px] font-extrabold text-[#6b8072] uppercase tracking-wider">Dinner</p>
+<h4 class="text-sm font-bold">Grilled Salmon</h4>
+<p class="text-[11px] text-[#6b8072] font-medium">610 kcal • 42g Protein</p>
+</div>
+</div>
+<!-- Snacks -->
+<div class="flex flex-col gap-3 group">
+<div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-background-light dark:bg-[#2d3a31] flex flex-col items-center justify-center border-2 border-dashed border-[#dee3df] dark:border-[#3d4a41] hover:border-primary/50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[32px] text-[#6b8072]">add_circle</span>
+<span class="text-[10px] font-bold text-[#6b8072] uppercase mt-2">Add Snack</span>
+</div>
+<div>
+<p class="text-[10px] font-extrabold text-[#6b8072] uppercase tracking-wider">Snack</p>
+<h4 class="text-sm font-bold text-[#6b8072]">Not Logged Yet</h4>
+<p class="text-[11px] text-[#6b8072] font-medium">Goal: 200-300 kcal</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

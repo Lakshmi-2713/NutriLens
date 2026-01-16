@@ -1,0 +1,35 @@
+{
+  "name": "nutrilens",
+  "version": "1.0.0",
+  "description": "NutriLens - Advanced Habit & Nutrition Tracking Application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'No build process needed for vanilla HTML/CSS/JS'",
+    "test": "echo 'Tests not yet implemented'"
+  },
+  "keywords": [
+    "nutrition",
+    "health",
+    "tracking",
+    "wellness",
+    "habits",
+    "express",
+    "nodejs"
+  ],
+  "author": "NutriLens Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
