@@ -1,7 +1,7 @@
 // Login Form Handler
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
-    
+
     if (loginForm) {
         loginForm.addEventListener('submit', handleLogin);
     }
@@ -9,25 +9,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function handleLogin(e) {
     e.preventDefault();
-    
+
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const submitButton = e.target.querySelector('button[type="submit"]');
-    
+
     // Validate inputs
     if (!window.NutriLens.FormValidator.validateEmail(email)) {
         window.NutriLens.Toast.show('Please enter a valid email address', 'error');
         return;
     }
-    
+
     if (!window.NutriLens.FormValidator.validatePassword(password)) {
         window.NutriLens.Toast.show('Password must be at least 8 characters', 'error');
         return;
     }
-    
+
     // Show loading state
     window.NutriLens.LoadingManager.setLoading(submitButton, true);
-    
+
     try {
         // Call the Express API
         const response = await fetch('/api/auth/login', {
@@ -39,22 +39,22 @@ async function handleLogin(e) {
         });
 
         const data = await response.json();
-        
+
         if (!response.ok) {
             throw new Error(data.message || 'Login failed');
         }
-        
+
         // Store user session
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        
+
         window.NutriLens.Toast.show('Login successful! Redirecting...', 'success');
-        
+
         // Redirect to dashboard
         setTimeout(() => {
-            window.location.href = '/';
+            window.location.href = '/dashboard';
         }, 1500);
-        
+
     } catch (error) {
         window.NutriLens.Toast.show(error.message || 'Login failed. Please try again.', 'error');
         window.NutriLens.LoadingManager.setLoading(submitButton, false);

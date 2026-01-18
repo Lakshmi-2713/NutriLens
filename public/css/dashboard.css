@@ -1,0 +1,294 @@
+/* NutriLens Dashboard Styles */
+
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Material Icons Configuration */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined' !important;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Radial Progress Ring Animation */
+.radial-progress-ring {
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+/* Global Smooth Transitions */
+* {
+    transition-property: background-color, border-color, color;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.slide-in {
+    animation: slideIn 0.4s ease-out;
+}
+
+.scale-in {
+    animation: scaleIn 0.3s ease-out;
+}
+
+/* Scrollbar Styling */
+.overflow-y-auto::-webkit-scrollbar {
+    width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #dee3df;
+    border-radius: 3px;
+}
+
+.dark .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #2d3a31;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #6bc78a;
+}
+
+/* Habit Item Styles */
+.habit-item {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.habit-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 199, 138, 0.1);
+}
+
+.habit-checkbox {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.habit-checkbox:hover {
+    transform: scale(1.05);
+}
+
+.habit-completed .habit-title {
+    text-decoration: line-through;
+    color: #6b8072;
+}
+
+/* Meal Card Hover Effects */
+.meal-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.meal-card:hover {
+    transform: translateY(-4px);
+}
+
+.meal-card .meal-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.meal-card:hover .meal-overlay {
+    opacity: 1;
+}
+
+/* Weekly Calendar Day Items */
+.calendar-day {
+    transition: all 0.3s ease;
+}
+
+.calendar-day:hover {
+    transform: scale(1.05);
+}
+
+.calendar-day.today {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(107, 199, 138, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(107, 199, 138, 0);
+    }
+}
+
+/* Nutrition Macro Cards */
+.macro-card {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.macro-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Button Effects */
+button {
+    transition: all 0.2s ease;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Search Input */
+#searchInput:focus {
+    outline: none;
+}
+
+/* Loading State */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(107, 199, 138, 0.2),
+            transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+/* Status Badges */
+.status-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.status-done {
+    background-color: #6bc78a;
+    color: white;
+}
+
+.status-eating {
+    background-color: #3b82f6;
+    color: white;
+}
+
+/* Add Snack Card */
+.add-snack-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-snack-card:hover {
+    border-color: rgba(107, 199, 138, 0.5);
+    background-color: rgba(107, 199, 138, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    aside {
+        width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid.grid-cols-7 {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    aside {
+        position: fixed;
+        left: -100%;
+        z-index: 50;
+        transition: left 0.3s ease;
+    }
+
+    aside.open {
+        left: 0;
+    }
+}
+
+/* Dark Mode Specific Adjustments */
+.dark .habit-item:hover {
+    box-shadow: 0 4px 12px rgba(107, 199, 138, 0.2);
+}
+
+/* Focus Visible for Accessibility */
+*:focus-visible {
+    outline: 2px solid #6bc78a;
+    outline-offset: 2px;
+}

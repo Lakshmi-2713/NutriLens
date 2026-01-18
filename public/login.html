@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>NutriLens Login</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="/css/login.css">
     <script id="tailwind-config">
         tailwind.config = {
@@ -32,80 +35,116 @@
         }
     </script>
 </head>
+
 <body class="bg-background-light dark:bg-background-dark transition-colors duration-300">
     <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
         <!-- Header -->
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 px-6 py-4 md:px-40">
+        <header
+            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 px-6 py-4 md:px-40">
             <a href="index.html" class="flex items-center gap-3 text-primary">
-                 <img src="assets/logo.png" alt="NutriLens Logo" class="h-12 w-12 object-contain">
-                <h2 class="text-[#131616] dark:text-white text-xl font-bold leading-tight tracking-tight">NutriLens</h2>
+                <img src="assets/logo.png" alt="NutriLens Logo" class="h-12 w-12 object-contain">
+                <h2 class="text-[#131616] dark:text-white text-xl font-bold leading-tight tracking-tight">NutriLens
+                </h2>
             </a>
             <div class="flex items-center gap-6">
                 <nav class="hidden md:flex items-center gap-8">
-                    <a class="text-[#131616] dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="index.html#features">Features</a>
-                    <a class="text-[#131616] dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="index.html#pricing">Support</a>
+                    <a class="text-[#131616] dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors"
+                        href="index.html#features">Features</a>
+                    <a class="text-[#131616] dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors"
+                        href="index.html#pricing">Support</a>
                 </nav>
-                <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                <button id="theme-toggle"
+                    class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+                    aria-label="Toggle theme">
                     <span class="material-symbols-outlined dark-mode-icon hidden dark:block">light_mode</span>
                     <span class="material-symbols-outlined light-mode-icon dark:hidden">dark_mode</span>
                 </button>
-                <a href="register.html" class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light text-sm font-bold transition-all hover:bg-primary/20">
+                <a href="register.html"
+                    class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light text-sm font-bold transition-all hover:bg-primary/20">
                     <span class="truncate">Join Now</span>
                 </a>
             </div>
         </header>
 
         <!-- Main Content -->
-        <main class="flex-1 flex flex-col items-center justify-center px-4 py-12 bg-gradient-to-b from-white to-[#f0f4f4] dark:from-background-dark dark:to-background-dark/95">
+        <main
+            class="flex-1 flex flex-col items-center justify-center px-4 py-12 bg-gradient-to-b from-white to-[#f0f4f4] dark:from-background-dark dark:to-background-dark/95">
             <div class="w-full max-w-[440px] flex flex-col items-center animate-fade-in">
                 <!-- Branding & Title -->
                 <div class="mb-8 text-center">
-                    <h1 class="text-[#131616] dark:text-white tracking-tight text-3xl font-extrabold leading-tight mb-2">Welcome back</h1>
-                    <p class="text-[#6c7e7f] dark:text-gray-400 text-base font-normal">Track your vitals and join 10,000+ users.</p>
+                    <h1
+                        class="text-[#131616] dark:text-white tracking-tight text-3xl font-extrabold leading-tight mb-2">
+                        Welcome back</h1>
+                    <p class="text-[#6c7e7f] dark:text-gray-400 text-base font-normal">Track your vitals and join
+                        10,000+ users.</p>
                 </div>
 
                 <!-- Login Card -->
-                <div class="w-full bg-white dark:bg-[#252d35] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none p-8 border border-gray-100 dark:border-gray-800">
+                <div
+                    class="w-full bg-white dark:bg-[#252d35] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none p-8 border border-gray-100 dark:border-gray-800">
                     <form id="loginForm" class="space-y-5">
                         <!-- Email Field -->
                         <div class="flex flex-col gap-2">
-                            <label class="text-[#131616] dark:text-gray-200 text-sm font-semibold leading-normal" for="email">Email Address</label>
-                            <input class="form-input flex w-full rounded-lg text-[#131616] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-[#dee3e3] dark:border-gray-700 bg-white dark:bg-[#1d242a] focus:border-primary h-12 placeholder:text-[#6c7e7f] px-4 text-sm font-normal transition-all" id="email" placeholder="name@example.com" type="email" required/>
+                            <label class="text-[#131616] dark:text-gray-200 text-sm font-semibold leading-normal"
+                                for="email">Email Address</label>
+                            <input
+                                class="form-input flex w-full rounded-lg text-[#131616] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-[#dee3e3] dark:border-gray-700 bg-white dark:bg-[#1d242a] focus:border-primary h-12 placeholder:text-[#6c7e7f] px-4 text-sm font-normal transition-all"
+                                id="email" placeholder="name@example.com" type="email" required />
                         </div>
 
                         <!-- Password Field -->
                         <div class="flex flex-col gap-2">
                             <div class="flex justify-between items-center">
-                                <label class="text-[#131616] dark:text-gray-200 text-sm font-semibold leading-normal" for="password">Password</label>
+                                <label class="text-[#131616] dark:text-gray-200 text-sm font-semibold leading-normal"
+                                    for="password">Password</label>
                                 <a class="text-xs font-bold text-primary hover:underline" href="#">Forgot password?</a>
                             </div>
                             <div class="relative flex w-full items-stretch">
-                                <input class="form-input flex w-full rounded-lg text-[#131616] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-[#dee3e3] dark:border-gray-700 bg-white dark:bg-[#1d242a] focus:border-primary h-12 placeholder:text-[#6c7e7f] px-4 text-sm font-normal transition-all" id="password" placeholder="Enter your password" type="password" required/>
-                                <button class="absolute right-3 top-1/2 -translate-y-1/2 text-[#6c7e7f] hover:text-primary" type="button" id="togglePassword">
+                                <input
+                                    class="form-input flex w-full rounded-lg text-[#131616] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-[#dee3e3] dark:border-gray-700 bg-white dark:bg-[#1d242a] focus:border-primary h-12 placeholder:text-[#6c7e7f] px-4 text-sm font-normal transition-all"
+                                    id="password" placeholder="Enter your password" type="password" required />
+                                <button
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-[#6c7e7f] hover:text-primary"
+                                    type="button" id="togglePassword">
                                     <span class="material-symbols-outlined text-[20px]">visibility</span>
                                 </button>
                             </div>
                         </div>
 
                         <!-- Submit Button -->
-                        <button class="w-full h-12 bg-primary hover:bg-opacity-90 text-white rounded-lg font-bold text-base transition-all flex items-center justify-center gap-2 mt-2" type="submit">
+                        <button
+                            class="w-full h-12 bg-primary hover:bg-opacity-90 text-white rounded-lg font-bold text-base transition-all flex items-center justify-center gap-2 mt-2"
+                            type="submit">
                             <span>Sign In</span>
                             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                         </button>
 
                         <!-- Divider -->
                         <div class="relative py-4">
-                            <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-[#dee3e3] dark:border-gray-700"></div></div>
-                            <div class="relative flex justify-center text-xs uppercase"><span class="bg-white dark:bg-[#252d35] px-2 text-[#6c7e7f]">Or continue with</span></div>
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-[#dee3e3] dark:border-gray-700"></div>
+                            </div>
+                            <div class="relative flex justify-center text-xs uppercase"><span
+                                    class="bg-white dark:bg-[#252d35] px-2 text-[#6c7e7f]">Or continue with</span></div>
                         </div>
 
                         <!-- Social Login -->
-                        <button class="w-full h-12 border border-[#dee3e3] dark:border-gray-700 bg-white dark:bg-[#1d242a] text-[#131616] dark:text-white rounded-lg font-semibold text-sm transition-all hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center justify-center gap-3" type="button">
+                        <button
+                            class="w-full h-12 border border-[#dee3e3] dark:border-gray-700 bg-white dark:bg-[#1d242a] text-[#131616] dark:text-white rounded-lg font-semibold text-sm transition-all hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center justify-center gap-3"
+                            type="button">
                             <svg class="w-5 h-5" viewBox="0 0 24 24">
-                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
-                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
-                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
-                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+                                <path
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                    fill="#4285F4"></path>
+                                <path
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                    fill="#34A853"></path>
+                                <path
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                    fill="#FBBC05"></path>
+                                <path
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    fill="#EA4335"></path>
                             </svg>
                             Google
                         </button>
@@ -114,16 +153,20 @@
 
                 <!-- Footer Link -->
                 <p class="mt-8 text-center text-sm text-[#6c7e7f] dark:text-gray-400">
-                    Don't have an account? 
+                    Don't have an account?
                     <a class="font-bold text-primary hover:underline" href="register.html">Create an account</a>
                 </p>
 
                 <!-- Trust Indicator -->
-                <div class="mt-12 flex items-center gap-4 py-2 px-4 rounded-full bg-primary/5 dark:bg-primary/10 border border-primary/10">
+                <div
+                    class="mt-12 flex items-center gap-4 py-2 px-4 rounded-full bg-primary/5 dark:bg-primary/10 border border-primary/10">
                     <div class="flex -space-x-2">
-                        <img alt="User avatar 1" class="h-6 w-6 rounded-full ring-2 ring-white dark:ring-[#252d35]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyPmgbzH8ABk8IC7ymsHuCX9NVrt5ymXCcYb4MXYEJbRL9gwwlJVZcmGZq16RdCmg7_Qn5uePlje_zJDpyJfzGo1KZ2QLYQn4siU1frO4WvN_YUoFyzEhFhiWP7OgOiYshkaXVewCvqa7nG3wL6HhlJRuQCiBnnxd6pc8CQ5vJMCHZKJxgzrplNWIxGhENCJIB3UEfXJVMdHsByk5bnOuudySmiKxlXssdHYiE2zN8veErGawClMVskKPYD09xdFmvckcHQAKU709Z"/>
-                        <img alt="User avatar 2" class="h-6 w-6 rounded-full ring-2 ring-white dark:ring-[#252d35]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOFrK1mxeFjVfiTmuSWZlqXRXsMzkJkFDzy2d4q6efR98ihNuOGlFDH-hfLTg5fFxNIfV6hKU8zyO3-RFtkMvP5viVraQoxyho9EdQd1WVuKWLJT2A39CwyiW99QbGvaIElPL1T-5bOMYCXyrU7FcOx8BhGS74VMGmaYNKRJraBAj1zghp38FQ89VUlmuGDlzvVQ4NRzBx0mvh6MYLZb9TyO7PodM1_1YhYUsqrTd5UJO5L-OCBHXJjg2XrfkrltoWYGPXVbAcpLIG"/>
-                        <img alt="User avatar 3" class="h-6 w-6 rounded-full ring-2 ring-white dark:ring-[#252d35]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSuBd-KGSYZq8HiQiAI9KBGQt12-5Y9E-tf2qll593kqupLtHBEtpeWME7fZpHojShshQBIuXi90Vjmry645OeUSjBglbqzlTWp2m4MVmg5bIDxR2VfTLNqLKeLmB5SewlMR010d0Ab9c75vZiablxih4ZUApjTnVAPnYnfpJngMJoTvPZhLq2ac349qrHjM4ZqnSVh8A6Uqzo2Eu45H6XnbGnohiK6KRkZ55SJSfSr463tBAgXQHRlbdWd0EZm0D4z8PpRklHG-tb"/>
+                        <img alt="User avatar 1" class="h-6 w-6 rounded-full ring-2 ring-white dark:ring-[#252d35]"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyPmgbzH8ABk8IC7ymsHuCX9NVrt5ymXCcYb4MXYEJbRL9gwwlJVZcmGZq16RdCmg7_Qn5uePlje_zJDpyJfzGo1KZ2QLYQn4siU1frO4WvN_YUoFyzEhFhiWP7OgOiYshkaXVewCvqa7nG3wL6HhlJRuQCiBnnxd6pc8CQ5vJMCHZKJxgzrplNWIxGhENCJIB3UEfXJVMdHsByk5bnOuudySmiKxlXssdHYiE2zN8veErGawClMVskKPYD09xdFmvckcHQAKU709Z" />
+                        <img alt="User avatar 2" class="h-6 w-6 rounded-full ring-2 ring-white dark:ring-[#252d35]"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOFrK1mxeFjVfiTmuSWZlqXRXsMzkJkFDzy2d4q6efR98ihNuOGlFDH-hfLTg5fFxNIfV6hKU8zyO3-RFtkMvP5viVraQoxyho9EdQd1WVuKWLJT2A39CwyiW99QbGvaIElPL1T-5bOMYCXyrU7FcOx8BhGS74VMGmaYNKRJraBAj1zghp38FQ89VUlmuGDlzvVQ4NRzBx0mvh6MYLZb9TyO7PodM1_1YhYUsqrTd5UJO5L-OCBHXJjg2XrfkrltoWYGPXVbAcpLIG" />
+                        <img alt="User avatar 3" class="h-6 w-6 rounded-full ring-2 ring-white dark:ring-[#252d35]"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSuBd-KGSYZq8HiQiAI9KBGQt12-5Y9E-tf2qll593kqupLtHBEtpeWME7fZpHojShshQBIuXi90Vjmry645OeUSjBglbqzlTWp2m4MVmg5bIDxR2VfTLNqLKeLmB5SewlMR010d0Ab9c75vZiablxih4ZUApjTnVAPnYnfpJngMJoTvPZhLq2ac349qrHjM4ZqnSVh8A6Uqzo2Eu45H6XnbGnohiK6KRkZ55SJSfSr463tBAgXQHRlbdWd0EZm0D4z8PpRklHG-tb" />
                     </div>
                     <span class="text-xs font-medium text-[#131616] dark:text-gray-300">Join 10,000+ others today</span>
                 </div>
@@ -132,9 +175,11 @@
 
         <!-- Aesthetic background elements -->
         <div class="fixed top-[-10%] left-[-5%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full -z-10"></div>
-        <div class="fixed bottom-[-10%] right-[-5%] w-[30%] h-[40%] bg-primary/10 blur-[100px] rounded-full -z-10"></div>
+        <div class="fixed bottom-[-10%] right-[-5%] w-[30%] h-[40%] bg-primary/10 blur-[100px] rounded-full -z-10">
+        </div>
     </div>
-    <script src="/js/main.js"></script>
+    <script src="/js/home.js"></script>
     <script src="/js/login.js"></script>
 </body>
+
 </html>

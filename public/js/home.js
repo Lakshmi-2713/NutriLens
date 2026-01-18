@@ -1,3 +1,4 @@
+// NutriLens Home & Global Utilities (home.js)
 // Theme Management
 class ThemeManager {
     constructor() {
@@ -37,18 +38,18 @@ class Toast {
     static show(message, type = 'success') {
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
-        
-        const icon = type === 'success' 
+
+        const icon = type === 'success'
             ? '<span class="material-symbols-outlined text-green-500">check_circle</span>'
             : '<span class="material-symbols-outlined text-red-500">error</span>';
-        
+
         toast.innerHTML = `
             ${icon}
             <span class="text-sm font-medium">${message}</span>
         `;
-        
+
         document.body.appendChild(toast);
-        
+
         setTimeout(() => {
             toast.style.animation = 'slideIn 0.3s ease-out reverse';
             setTimeout(() => toast.remove(), 300);
@@ -62,7 +63,7 @@ function initSmoothScroll() {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             if (href === '#') return;
-            
+
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
@@ -108,10 +109,10 @@ class LoadingManager {
 function initPasswordToggles() {
     const toggleButtons = document.querySelectorAll('#togglePassword');
     toggleButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const input = this.parentElement.querySelector('input');
             const icon = this.querySelector('.material-symbols-outlined');
-            
+
             if (input.type === 'password') {
                 input.type = 'text';
                 icon.textContent = 'visibility_off';
@@ -148,7 +149,7 @@ function initScrollAnimations() {
 function initMobileMenu() {
     const menuButton = document.querySelector('#mobile-menu-button');
     const menu = document.querySelector('#mobile-menu');
-    
+
     if (menuButton && menu) {
         menuButton.addEventListener('click', () => {
             menu.classList.toggle('hidden');
@@ -160,19 +161,19 @@ function initMobileMenu() {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize theme manager
     new ThemeManager();
-    
+
     // Initialize smooth scrolling
     initSmoothScroll();
-    
+
     // Initialize password toggles
     initPasswordToggles();
-    
+
     // Initialize scroll animations
     initScrollAnimations();
-    
+
     // Initialize mobile menu
     initMobileMenu();
-    
+
     // Add subtle entrance animation to main content
     const main = document.querySelector('main');
     if (main) {
