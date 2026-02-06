@@ -58,7 +58,6 @@ class DashboardApp {
     this.renderWeeklyCalendar();
     this.renderNutrition();
     this.renderHabits();
-    this.renderMeals();
   }
 
   renderUserInfo() {
@@ -66,13 +65,11 @@ class DashboardApp {
     const userNameEl = document.getElementById('userName');
     const userStatusEl = document.getElementById('userStatus');
     const userAvatarEl = document.getElementById('userAvatar');
-    const streakDaysEl = document.getElementById('streakDays');
     const welcomeEl = document.getElementById('welcomeMessage');
 
     if (userNameEl) userNameEl.textContent = user.name;
     if (userStatusEl) userStatusEl.textContent = user.status;
     if (userAvatarEl) userAvatarEl.style.backgroundImage = `url('${user.avatar}')`;
-    if (streakDaysEl) streakDaysEl.textContent = user.streak;
     if (welcomeEl) welcomeEl.textContent = `Welcome back, ${user.name.split(' ')[0]}!`;
   }
 
@@ -205,50 +202,6 @@ class DashboardApp {
     });
   }
 
-  renderMeals() {
-    const container = document.getElementById('mealPlan');
-    if (!container) return;
-
-    container.innerHTML = '';
-    const { meals } = this.data;
-
-    meals.forEach((meal, index) => {
-      const mealEl = document.createElement('div');
-      mealEl.className = 'meal-card flex flex-col gap-3 group';
-
-      if (meal.image) {
-        mealEl.innerHTML = `
-          <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-cover bg-center" style="background-image: url('${meal.image}')">
-            <div class="meal-overlay absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-3">
-              <button class="bg-white/90 text-black text-[10px] font-bold py-1.5 rounded-lg w-full hover:bg-white transition-all">View Recipe</button>
-            </div>
-            ${meal.status ? `<span class="status-badge status-${meal.status === 'DONE' ? 'done' : 'eating'}">${meal.status}</span>` : ''}
-          </div>
-          <div>
-            <p class="text-[10px] font-extrabold text-[#6b8072] uppercase tracking-wider">${meal.type}</p>
-            <h4 class="text-sm font-bold">${meal.name}</h4>
-            <p class="text-[11px] text-[#6b8072] font-medium">${meal.calories} kcal • ${meal.protein}g Protein</p>
-          </div>
-        `;
-      } else {
-        mealEl.innerHTML = `
-          <div class="add-snack-card relative overflow-hidden rounded-xl aspect-[4/3] bg-background-light dark:bg-[#2d3a31] flex flex-col items-center justify-center border-2 border-dashed border-[#dee3df] dark:border-[#3d4a41]">
-            <span class="material-symbols-outlined text-[32px] text-[#6b8072]">add_circle</span>
-            <span class="text-[10px] font-bold text-[#6b8072] uppercase mt-2">Add Snack</span>
-          </div>
-          <div>
-            <p class="text-[10px] font-extrabold text-[#6b8072] uppercase tracking-wider">${meal.type}</p>
-            <h4 class="text-sm font-bold text-[#6b8072]">${meal.name}</h4>
-            <p class="text-[11px] text-[#6b8072] font-medium">Goal: 200-300 kcal</p>
-          </div>
-        `;
-      }
-
-      mealEl.style.animationDelay = `${index * 0.1}s`;
-      mealEl.classList.add('scale-in');
-      container.appendChild(mealEl);
-    });
-  }
 
   initializeProfilePage() {
     const ageInput = document.getElementById('age');
@@ -310,9 +263,7 @@ class DashboardApp {
     const titles = {
       dashboard: 'Dashboard Overview',
       profile: 'Profile Setup',
-      meals: 'Meal Plans',
       habits: 'Habit Library',
-      analytics: 'Analytics',
       settings: 'Settings'
     };
     const pageTitleEl = document.getElementById('pageTitle');

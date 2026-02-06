@@ -56,19 +56,9 @@
                         <span class="text-sm">Dashboard</span>
                     </a>
                     <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6b8072] hover:bg-background-light dark:hover:bg-[#2d3a31] transition-colors"
-                        href="#" data-page="meals">
-                        <span class="material-symbols-outlined text-[22px]">restaurant</span>
-                        <span class="text-sm font-semibold">Meal Plans</span>
-                    </a>
-                    <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6b8072] hover:bg-background-light dark:hover:bg-[#2d3a31] transition-colors"
                         href="#" data-page="habits">
                         <span class="material-symbols-outlined text-[22px]">auto_stories</span>
                         <span class="text-sm font-semibold">Habit Library</span>
-                    </a>
-                    <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6b8072] hover:bg-background-light dark:hover:bg-[#2d3a31] transition-colors"
-                        href="#" data-page="analytics">
-                        <span class="material-symbols-outlined text-[22px]">bar_chart</span>
-                        <span class="text-sm font-semibold">Analytics</span>
                     </a>
                     <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#6b8072] hover:bg-background-light dark:hover:bg-[#2d3a31] transition-colors"
                         href="#" data-page="profile">
@@ -136,13 +126,6 @@
                         class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-[#1a261f]"></span>
                 </button>
                 <div class="h-8 w-px bg-[#dee3df] dark:border-[#2d3a31]"></div>
-                <div class="flex flex-col items-end">
-                    <span class="text-xs font-bold text-[#6b8072]">DAILY STREAK</span>
-                    <span id="streakDisplay" class="text-sm font-extrabold text-primary flex items-center gap-1">
-                        <span id="streakDays">12</span> DAYS
-                        <span class="material-symbols-outlined text-[16px]">local_fire_department</span>
-                    </span>
-                </div>
             </div>
         </header>
 
@@ -217,20 +200,6 @@
                         <div id="habitsList" class="space-y-3 flex-1 overflow-y-auto pr-1"></div>
                     </div>
 
-                    <!-- Meal Plan -->
-                    <div
-                        class="col-span-12 bg-white dark:bg-[#1a261f] p-6 rounded-2xl border border-[#dee3df] dark:border-[#2d3a31] shadow-sm">
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <h3 class="text-lg font-bold">Today's Meal Plan</h3>
-                                <p class="text-sm text-[#6b8072]">Balanced nutrition for performance</p>
-                            </div>
-                            <button
-                                class="bg-primary/10 text-primary px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary/20 transition-colors">Adjust
-                                Plan</button>
-                        </div>
-                        <div id="mealPlan" class="grid grid-cols-1 md:grid-cols-4 gap-4"></div>
-                    </div>
                 </div>
             </div>
 
@@ -373,7 +342,169 @@
                         your profile settings.</p>
                 </section>
             </div>
-        </div>
+
+            <!-- Habit Library Page -->
+            <div id="habitsPage" class="page-content hidden p-8 space-y-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-extrabold tracking-tight">Habit Library</h1>
+                        <p class="text-[#6b8072] font-medium mt-1">Explore and add new habits to your routine.</p>
+                    </div>
+                    <button
+                        class="bg-primary hover:bg-opacity-90 text-white font-bold px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-primary/20">
+                        Suggest Habit
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Morning Routine -->
+                    <div
+                        class="bg-white dark:bg-[#1a261f] p-6 rounded-2xl border border-[#dee3df] dark:border-[#2d3a31] shadow-sm">
+                        <div
+                            class="size-12 rounded-xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-500 mb-4">
+                            <span class="material-symbols-outlined text-2xl">wb_sunny</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Morning Routine</h3>
+                        <p class="text-sm text-[#6b8072] mb-4">Start your day with energy and focus.</p>
+                        <div class="space-y-3">
+                            <div
+                                class="flex items-center justify-between p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30">
+                                <span class="text-sm font-semibold">Morning Yoga</span>
+                                <button class="text-primary text-xs font-bold">Add</button>
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30">
+                                <span class="text-sm font-semibold">Healthy Breakfast</span>
+                                <button class="text-primary text-xs font-bold">Add</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Health & Fitness -->
+                    <div
+                        class="bg-white dark:bg-[#1a261f] p-6 rounded-2xl border border-[#dee3df] dark:border-[#2d3a31] shadow-sm">
+                        <div
+                            class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
+                            <span class="material-symbols-outlined text-2xl">fitness_center</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Health & Fitness</h3>
+                        <p class="text-sm text-[#6b8072] mb-4">Build strength and improve your overall health.</p>
+                        <div class="space-y-3">
+                            <div
+                                class="flex items-center justify-between p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30">
+                                <span class="text-sm font-semibold">Daily Run</span>
+                                <button class="text-primary text-xs font-bold">Add</button>
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30">
+                                <span class="text-sm font-semibold">Strength Training</span>
+                                <button class="text-primary text-xs font-bold">Add</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Productivity -->
+                    <div
+                        class="bg-white dark:bg-[#1a261f] p-6 rounded-2xl border border-[#dee3df] dark:border-[#2d3a31] shadow-sm">
+                        <div
+                            class="size-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-500 mb-4">
+                            <span class="material-symbols-outlined text-2xl">task_alt</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Productivity</h3>
+                        <p class="text-sm text-[#6b8072] mb-4">Optimize your workflow and get more done.</p>
+                        <div class="space-y-3">
+                            <div
+                                class="flex items-center justify-between p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30">
+                                <span class="text-sm font-semibold">Focus Timer</span>
+                                <button class="text-primary text-xs font-bold">Add</button>
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-3 rounded-xl bg-background-light dark:bg-[#2d3a31]/30">
+                                <span class="text-sm font-semibold">Daily Planning</span>
+                                <button class="text-primary text-xs font-bold">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settingsPage" class="page-content hidden p-8 space-y-8">
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight">Settings</h1>
+                    <p class="text-[#6b8072] font-medium mt-1">Manage your account and preferences.</p>
+                </div>
+
+                <div class="max-w-2xl space-y-6">
+                    <!-- Account Settings -->
+                    <div
+                        class="bg-white dark:bg-[#1a261f] p-6 rounded-2xl border border-[#dee3df] dark:border-[#2d3a31] shadow-sm">
+                        <h3 class="text-lg font-bold mb-4">Account</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold text-[#6b8072] mb-1">Email Address</label>
+                                <input type="email" value="alex.rivera@example.com"
+                                    class="w-full bg-background-light dark:bg-[#2d3a31] border-none rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/50 transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-[#6b8072] mb-1">Language</label>
+                                <select
+                                    class="w-full bg-background-light dark:bg-[#2d3a31] border-none rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/50 transition-all">
+                                    <option>English (US)</option>
+                                    <option>Spanish</option>
+                                    <option>French</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div
+                        class="bg-white dark:bg-[#1a261f] p-6 rounded-2xl border border-[#dee3df] dark:border-[#2d3a31] shadow-sm">
+                        <h3 class="text-lg font-bold mb-4">Notifications</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-bold">Daily Reminders</p>
+                                    <p class="text-xs text-[#6b8072]">Get notified about your daily habits.</p>
+                                </div>
+                                <div class="relative inline-block w-10 h-6">
+                                    <input type="checkbox" checked class="peer sr-only">
+                                    <div
+                                        class="w-full h-full bg-gray-200 dark:bg-gray-700 rounded-full peer-checked:bg-primary transition-colors cursor-pointer">
+                                    </div>
+                                    <div
+                                        class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-4">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-bold">Email Updates</p>
+                                    <p class="text-xs text-[#6b8072]">Weekly health summary and tips.</p>
+                                </div>
+                                <div class="relative inline-block w-10 h-6">
+                                    <input type="checkbox" class="peer sr-only">
+                                    <div
+                                        class="w-full h-full bg-gray-200 dark:bg-gray-700 rounded-full peer-checked:bg-primary transition-colors cursor-pointer">
+                                    </div>
+                                    <div
+                                        class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-4">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-3 pt-4">
+                        <button
+                            class="px-6 py-2.5 rounded-xl text-[#6b8072] font-bold hover:bg-background-light dark:hover:bg-[#2d3a31] transition-colors">Cancel</button>
+                        <button
+                            class="bg-primary hover:bg-opacity-90 text-white font-bold px-8 py-2.5 rounded-xl transition-all shadow-lg shadow-primary/20">Save
+                            Changes</button>
+                    </div>
+                </div>
+            </div>
     </main>
 
     <script src="/js/home.js"></script>
