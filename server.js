@@ -9,6 +9,12 @@ const jwt = require('jsonwebtoken');
 
 // Import models
 const User = require('./models/User');
+const Habit = require('./models/Habit');
+const HabitLog = require('./models/HabitLog');
+
+// Import utils
+const HabitEngine = require('./utils/habitEngine');
+const seedHabits = require('./seedHabits');
 
 // Load environment variables
 dotenv.config();
@@ -19,7 +25,10 @@ const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/nutrilens')
-    .then(() => console.log('✓ Successfully connected to MongoDB'))
+    .then(async () => {
+        console.log('✓ Successfully connected to MongoDB');
+        await seedHabits();
+    })
     .catch(err => {
         console.error('✗ MongoDB connection error:', err);
         process.exit(1);
@@ -342,34 +351,53 @@ app.get('/api/profile', (req, res) => {
     res.json(userProfile);
 });
 
-// API: Save/Update user profile
-app.post('/api/profile', (req, res) => {
-    const { age, weight, weightUnit, height, heightUnit, dietType, goal } = req.body;
-    if (age !== undefined) userProfile.age = age;
-    if (weight !== undefined) userProfile.weight = weight;
-    if (weightUnit !== undefined) userProfile.weightUnit = weightUnit;
-    if (height !== undefined) userProfile.height = height;
-    if (heightUnit !== undefined) userProfile.heightUnit = heightUnit;
-    if (dietType !== undefined) userProfile.dietType = dietType;
-    if (goal !== undefined) userProfile.goal = goal;
+// API: Save/Update user profile + Auto-assign habits
+app.post('/api/profile', async (req, res) => {
+    try {
+        const { age, weight, weightUnit, height, heightUnit, dietType, goal, commitment, activityLevel } = req.body;
 
-    const dailyCalories = calculateDailyCalories(userProfile);
-    const macros = calculateMacros(dailyCalories, userProfile.dietType);
-    dashboardData.nutrition.protein.goal = macros.protein;
-    dashboardData.nutrition.carbs.goal = macros.carbs;
-    dashboardData.nutrition.fats.goal = macros.fats;
-    const consumed = (dashboardData.nutrition.protein.current * 4) + (dashboardData.nutrition.carbs.current * 4) + (dashboardData.nutrition.fats.current * 9);
-    dashboardData.nutrition.caloriesLeft = dailyCalories - consumed;
+        // In a real app, we'd get userId from token (authenticateToken)
+        // For this demo, we'll use a fixed user or create one if not exists
+        let user = await User.findOne({ email: 'alex.rivera@example.com' });
+        if (!user) {
+            user = new User({ fullName: 'Alex Rivera', email: 'alex.rivera@example.com', password: 'password123' });
+        }
 
-    if (dietType === 'veg') {
-        dashboardData.meals = [
-            { id: 1, type: 'Breakfast', name: 'Quinoa & Fruit Bowl', calories: Math.round(dailyCalories * 0.25), protein: Math.round(macros.protein * 0.20), image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuASu72XKq_TLrSI1AgkEjZjZvLMLuQbos96y4rdKUwK5U8__NeWTJyKImUqL-VRokk700wbz0H7tmoCgumxv2iE0XdKSCZUyspg5o2yeZCkhWvUPP1s2ohDHc-Rk-ET4HUf19EGxg2HTG8FRIKnFDOpsTdPbgP0L-8w28RfC4-Nt6mdnGC7zsZV2gfAe2Gnvxi9su86Rywsd9pdbakPp_yL9VmIG5It6Isq8WnUU7Wy5ZXJOBWkTZLyNmCz12WR6fuWqXuA2ZjW14Fz', status: null },
-            { id: 2, type: 'Lunch', name: 'Chickpea Buddha Bowl', calories: Math.round(dailyCalories * 0.35), protein: Math.round(macros.protein * 0.35), image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuChYLteDVYsdVe1lJ-NrzALEdI5-Q6rgyxoe7iOv7Cn23bmClNyJoqOiz4jdVo1sogSqTT4x6st_SqZV-77_EI8xau5O9S3VOOlooQoRhZ7oByUK3XUwBpwzDXKSP7-p4Pt8WQQjMlYsyJ1Hi_P41pm81QfmunXOhKMVug2iCeHshAmnHYWUTqkYLKx47aPlZ05SK2HjAiulowY7Hk0ZVd0Q_Iymc2bdEvBFqvBmNfdKRVPPYcT_wRQpGFlKL7HLE-aRUOU8arlwdXS', status: null },
-            { id: 3, type: 'Dinner', name: 'Tofu Stir-fry', calories: Math.round(dailyCalories * 0.30), protein: Math.round(macros.protein * 0.30), image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCWnr0KhEnqQX-zyKx5jruJAM7DXWu1NEmtg6QMuP-IVXeKoRd3Ic9G52blpbnCgY5M9R80tpMMMUESikFq5WCjhEyPMgNA9imQw9UPPPv72JVHL9ypoUhQOVySSYk6l5IoyRLEyHm-V8TRr-GsWqOXgVOxXL1qTc-hTLnrgOkZ8v9yWhwArO_3RoIjAJPnK_-miCH93kiyT8pHYAlzy2z-8JMdHG8XC2R4kZ-JSFrT0bcuN1kyrwUz1NXqAM1Nv5t0cqA1ikvgdQ-q', status: null },
-            { id: 4, type: 'Snack', name: 'Nuts & Seeds Mix', calories: Math.round(dailyCalories * 0.10), protein: Math.round(macros.protein * 0.15), image: null, status: null }
-        ];
+        user.profile = {
+            age: age || user.profile?.age,
+            weight: weight || user.profile?.weight,
+            weightUnit: weightUnit || user.profile?.weightUnit || 'kg',
+            height: height || user.profile?.height,
+            heightUnit: heightUnit || user.profile?.heightUnit || 'cm',
+            dietType: dietType || user.profile?.dietType || 'veg',
+            goal: goal || user.profile?.goal || 'maintain',
+            commitment: commitment || user.profile?.commitment || 'balanced',
+            activityLevel: activityLevel || user.profile?.activityLevel || 'moderate'
+        };
+
+        // Trigger Habit Assignment Engine
+        const assignedHabitIds = await HabitEngine.assignHabits(user.profile);
+        user.assignedHabits = assignedHabitIds;
+
+        await user.save();
+
+        // Update legacy mock constants for compatibility with existing UI
+        userProfile = { ...userProfile, ...user.profile };
+        const dailyCalories = calculateDailyCalories(user.profile);
+        const macros = calculateMacros(dailyCalories, user.profile.dietType);
+        dashboardData.nutrition.protein.goal = macros.protein;
+        dashboardData.nutrition.carbs.goal = macros.carbs;
+        dashboardData.nutrition.fats.goal = macros.fats;
+
+        res.json({
+            success: true,
+            message: 'Profile saved and habits assigned successfully',
+            redirect: '/dashboard' // In our app, Habit Library is a page within dashboard
+        });
+    } catch (error) {
+        console.error('Profile update error:', error);
+        res.status(500).json({ success: false, message: 'Server error during profile update' });
     }
-    res.json({ success: true, profile: userProfile, message: 'Profile saved successfully' });
 });
 
 // API: Get weekly progress
@@ -394,27 +422,71 @@ app.patch('/api/nutrition', (req, res) => {
     res.json({ success: true, nutrition: dashboardData.nutrition });
 });
 
-// API: Get habits
-app.get('/api/habits', (req, res) => {
-    res.json(dashboardData.habits);
+// API: Get daily habits (Assigned + Today's logs)
+app.get('/api/habits/daily', async (req, res) => {
+    try {
+        const today = new Date().toISOString().split('T')[0];
+        const user = await User.findOne({ email: 'alex.rivera@example.com' }).populate('assignedHabits');
+
+        if (!user) {
+            // Return empty habits array for new users instead of 404 to prevent JS crash
+            return res.json([]);
+        }
+
+        const logs = await HabitLog.find({
+            userId: user._id,
+            date: today
+        });
+
+        const habitsWithStatus = user.assignedHabits.map(habit => {
+            const log = logs.find(l => l.habitId.toString() === habit._id.toString());
+            return {
+                ...habit.toObject(),
+                id: habit._id, // Add id for frontend compatibility
+                completed: log ? log.completed : false
+            };
+        });
+
+        res.json(habitsWithStatus);
+    } catch (error) {
+        console.error('Fetch habits error:', error);
+        res.status(500).json({ success: false, message: 'Server error fetching habits' });
+    }
 });
 
-// API: Toggle habit
-app.patch('/api/habits/:id/toggle', (req, res) => {
-    const habitId = parseInt(req.params.id);
-    const habit = dashboardData.habits.find(h => h.id === habitId);
-    if (!habit) return res.status(404).json({ success: false, message: 'Habit not found' });
-    habit.completed = !habit.completed;
-    res.json({ success: true, habit });
-});
+// API: Toggle daily habit
+app.patch('/api/habits/:id/toggle', async (req, res) => {
+    try {
+        const habitId = req.params.id;
+        const today = new Date().toISOString().split('T')[0];
 
-// API: Add habit
-app.post('/api/habits', (req, res) => {
-    const { title, subtitle } = req.body;
-    if (!title) return res.status(400).json({ success: false, message: 'Title is required' });
-    const newHabit = { id: dashboardData.habits.length + 1, title, subtitle: subtitle || '', completed: false };
-    dashboardData.habits.push(newHabit);
-    res.status(201).json({ success: true, habit: newHabit });
+        const user = await User.findOne({ email: 'alex.rivera@example.com' });
+        if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+
+        let log = await HabitLog.findOne({
+            userId: user._id,
+            habitId: habitId,
+            date: today
+        });
+
+        if (log) {
+            log.completed = !log.completed;
+            await log.save();
+        } else {
+            log = new HabitLog({
+                userId: user._id,
+                habitId: habitId,
+                date: today,
+                completed: true
+            });
+            await log.save();
+        }
+
+        res.json({ success: true, completed: log.completed });
+    } catch (error) {
+        console.error('Toggle habit error:', error);
+        res.status(500).json({ success: false, message: 'Server error toggling habit' });
+    }
 });
 
 // API: Delete habit

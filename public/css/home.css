@@ -67,13 +67,13 @@ input[type="password"] {
 
 input:focus {
     outline: none;
-    ring: 2px;
-    ring-color: rgba(45, 107, 108, 0.4);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
     background-color: white;
 }
 
 .dark input:focus {
-    background-color: rgba(31, 41, 55, 1);
+    background-color: #1A1A1A;
 }
 
 /* Submit Button Animation */
@@ -109,7 +109,7 @@ input:focus {
 }
 
 .dark .social-button:hover {
-    background-color: rgba(31, 41, 55, 1);
+    background-color: #1A1A1A;
 }
 
 /* Checkbox Styling */
@@ -119,8 +119,8 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-    background-color: #2d6b6c;
-    border-color: #2d6b6c;
+    background-color: #8b5cf6;
+    border-color: #8b5cf6;
 }
 
 /* Password Toggle Button */

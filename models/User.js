@@ -1,4 +1,4 @@
- const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     fullName: {
@@ -19,6 +19,18 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please provide a password'],
         minlength: 8
     },
+    profile: {
+        age: Number,
+        weight: Number,
+        weightUnit: { type: String, default: 'kg' },
+        height: Number,
+        heightUnit: { type: String, default: 'cm' },
+        dietType: { type: String, enum: ['veg', 'nonveg'], default: 'veg' },
+        goal: { type: String, enum: ['lose', 'maintain', 'gain'], default: 'maintain' },
+        commitment: { type: String, enum: ['consistent', 'balanced', 'intense'], default: 'balanced' },
+        activityLevel: { type: String, enum: ['sedentary', 'moderate', 'active'], default: 'moderate' }
+    },
+    assignedHabits: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Habit' }],
     createdAt: {
         type: Date,
         default: Date.now
@@ -32,7 +44,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Update updatedAt before saving
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
     this.updatedAt = Date.now();
     next();
 });
