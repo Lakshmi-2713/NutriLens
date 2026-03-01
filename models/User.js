@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
         dietType: { type: String, enum: ['veg', 'nonveg'], default: 'veg' },
         goal: { type: String, enum: ['lose', 'maintain', 'gain'], default: 'maintain' },
         commitment: { type: String, enum: ['consistent', 'balanced', 'intense'], default: 'balanced' },
-        activityLevel: { type: String, enum: ['sedentary', 'moderate', 'active'], default: 'moderate' }
+        activityLevel: { type: String, enum: ['sedentary', 'light', 'moderate', 'active', 'very_active'], default: 'moderate' }
     },
     assignedHabits: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Habit' }],
     createdAt: {

@@ -1,0 +1,263 @@
+[
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "696ca1f05163acb3b56ed606",
+    "fullName": "Test User",
+    "email": "test@example.com",
+    "password": "$2a$10$6NyaVMT0he7v.FEJCbcy5OlT/424BiU92K5z4hbxFNPdtX2ByXkKS",
+    "createdAt": "2026-01-18T09:03:44.818Z",
+    "updatedAt": "2026-01-18T09:03:44.836Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "696ca2cc5163acb3b56ed60b",
+    "fullName": "Test User",
+    "email": "test@gmail.com",
+    "password": "$2a$10$jsNzPX1fSw6WOhPdNs7yz.YM.RK2YPncYUngiXwRSu8SgTpy28/la",
+    "createdAt": "2026-01-18T09:07:24.180Z",
+    "updatedAt": "2026-01-18T09:07:24.183Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "696ca3145163acb3b56ed60f",
+    "fullName": "Test User",
+    "email": "test1@gmail.com",
+    "password": "$2a$10$Ub.Rum7cXy8vrtDP5ceL8uJ3b7q4PtDSvpMM7czAnR5TKOc2102b2",
+    "createdAt": "2026-01-18T09:08:36.944Z",
+    "updatedAt": "2026-01-18T09:08:36.945Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "696ca58cb4158d63aa3dc3e5",
+    "fullName": "Alex Rivera",
+    "email": "alex@nutrilens.com",
+    "password": "$2a$10$BWlHmDNDggrcDh1WRO5BLOEVqvr3uyhtaPKcF6xQpswctYZeTYxVO",
+    "createdAt": "2026-01-18T09:19:08.284Z",
+    "updatedAt": "2026-01-18T09:19:08.296Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "696ca6afd96c84525681c40f",
+    "fullName": "test",
+    "email": "test08@gmail.com",
+    "password": "$2a$10$eX/6QO2LaeUSSJrIzTMHLOGG3aMXFfgdgGk0OuTejGTX6VfFq9Yk.",
+    "createdAt": "2026-01-18T09:23:59.335Z",
+    "updatedAt": "2026-01-18T09:23:59.345Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "696ca9f4dbd5445507cf7688",
+    "fullName": "New User",
+    "email": "newuser2@example.com",
+    "password": "$2a$10$78XWO.FhDnzsvjD8G0t0KeU/uIshdUzdFmAnnsbZOd5.fNIJYWwTy",
+    "createdAt": "2026-01-18T09:37:56.867Z",
+    "updatedAt": "2026-01-18T09:37:56.892Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "696cab79bac628b738582436",
+    "fullName": "user123",
+    "email": "user123@eg.com",
+    "password": "$2a$10$5Pkn3DZqtZf/C65urOG1xed0ERi2PJoMI1Gy4Ant0z2dqpPl0925q",
+    "createdAt": "2026-01-18T09:44:25.645Z",
+    "updatedAt": "2026-01-18T09:44:25.655Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "696cac78bac628b73858243b",
+    "fullName": "Unique User",
+    "email": "newuser_unique_123@example.com",
+    "password": "$2a$10$2aLXoe5KxHNlXgFbwpnMn.07kGxcB0zE3wFyu0dndyaGuS2ImaIrK",
+    "createdAt": "2026-01-18T09:48:40.001Z",
+    "updatedAt": "2026-01-18T09:48:40.004Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "696cb7ed37c0ea109cc3cf11",
+    "fullName": "test",
+    "email": "test@nutri.com",
+    "password": "$2a$10$D2D/LTJw6S3PP53xJ.lb4eXaK0VJ5jkyLeCOS6sL7bHhnjpblWani",
+    "createdAt": "2026-01-18T10:37:33.241Z",
+    "updatedAt": "2026-01-18T10:37:33.247Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "69818e1002d4a5ac6530ce1a",
+    "fullName": "madhu",
+    "email": "test332@gmail.com",
+    "password": "$2a$10$uZEurXA2KMFIT0dpVU.1eOtCtC/HVpPyVbJW9IyhCakjweY8Y2hmG",
+    "createdAt": "2026-02-03T05:56:32.535Z",
+    "updatedAt": "2026-02-03T05:56:32.544Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "6984838ec1b755099013f79e",
+    "fullName": "lakshmi piggie",
+    "email": "piggie@pig.com",
+    "password": "$2a$10$7dKvO4/JX57uEZPGfhWiQO5css8uIoCFAHILod4TOn3AhbPUMypmO",
+    "createdAt": "2026-02-05T11:48:30.185Z",
+    "updatedAt": "2026-02-05T11:48:30.206Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "assignedHabits": [],
+    "_id": "6988e61721b93e739e12305c",
+    "fullName": "Prasanjeet",
+    "email": "prasanjeetpanda06@gmail.com",
+    "password": "$2a$10$jedjz9ZKUNChBq7XPOC6N.ty4pr9Vr8b5Y.bKsjW9MgahVGy.cf4G",
+    "createdAt": "2026-02-08T19:37:59.396Z",
+    "updatedAt": "2026-02-08T19:37:59.404Z",
+    "__v": 0
+  },
+  {
+    "profile": {
+      "age": 24,
+      "weight": 68.5,
+      "weightUnit": "kg",
+      "height": 175,
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "light"
+    },
+    "_id": "6991c7403942377fa8973140",
+    "fullName": "Alex Rivera",
+    "email": "alex.rivera@example.com",
+    "password": "password123",
+    "assignedHabits": [
+      "6988e9eda3b737fa158fdf35",
+      "6988e9eda3b737fa158fdf2c",
+      "6988e9eda3b737fa158fdf32",
+      "6988e9eda3b737fa158fdf39",
+      "6988e9eda3b737fa158fdf36"
+    ],
+    "createdAt": "2026-02-15T13:16:48.912Z",
+    "updatedAt": "2026-03-01T18:19:43.967Z",
+    "__v": 15
+  },
+  {
+    "profile": {
+      "weightUnit": "kg",
+      "heightUnit": "cm",
+      "dietType": "veg",
+      "goal": "maintain",
+      "commitment": "balanced",
+      "activityLevel": "moderate"
+    },
+    "_id": "69a44719eb7eda952db1aac0",
+    "fullName": "Tester",
+    "email": "tester@example.com",
+    "password": "$2a$10$.rvqxZZJ5l8uSycJsOouHe7IBV3DRl/2.mLD3HOcUZmcL.0XPeuNm",
+    "assignedHabits": [],
+    "createdAt": "2026-03-01T14:03:05.675Z",
+    "updatedAt": "2026-03-01T14:03:05.712Z",
+    "__v": 0
+  }
+]

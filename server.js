@@ -1,4 +1,4 @@
-// ==================== ERROR HANDLING ====================// NutriLens Express Server
+
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken');
 const User = require('./models/User');
 const Habit = require('./models/Habit');
 const HabitLog = require('./models/HabitLog');
+const NutritionLog = require('./models/NutritionLog');
 
 // Import utils
 const HabitEngine = require('./utils/habitEngine');
@@ -172,22 +173,25 @@ let userProfile = {
 };
 
 // ==================== HELPER FUNCTIONS ====================
-function calculateBMR(profile) {
-    const { age, weight, height, gender = 'female' } = profile;
-    if (gender === 'male') {
-        return (10 * weight) + (6.25 * height) - (5 * age) + 5;
-    } else {
-        return (10 * weight) + (6.25 * height) - (5 * age) - 161;
-    }
+function calculateMaintenance(profile) {
+    const multipliers = {
+        sedentary: 25,
+        light: 27.5,
+        moderate: 30,
+        active: 35,
+        very_active: 40
+    };
+    const multiplier = multipliers[profile.activityLevel] || 30;
+    return (profile.weight || 70) * multiplier;
 }
 
 function calculateDailyCalories(profile) {
-    const bmr = calculateBMR(profile);
-    const activityMultiplier = 1.55;
-    let calories = bmr * activityMultiplier;
-    if (profile.goal === 'lose') calories -= 500;
-    else if (profile.goal === 'gain') calories += 500;
-    return Math.round(calories);
+    let calories = calculateMaintenance(profile);
+    if (profile.goal === 'lose') calories -= 400;
+    else if (profile.goal === 'gain') calories += 400;
+
+    const minCalories = profile.gender === 'female' ? 1200 : 1500;
+    return Math.max(Math.round(calories), minCalories);
 }
 
 function calculateMacros(calories, dietType) {
@@ -347,20 +351,25 @@ app.get('/api/user', (req, res) => {
 });
 
 // API: Get user profile settings
-app.get('/api/profile', (req, res) => {
-    res.json(userProfile);
+app.get('/api/profile', authenticateToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId);
+        if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+        res.json(user.profile || userProfile); // fallback to default userProfile if empty
+    } catch (error) {
+        console.error('Error fetching profile:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
 });
 
 // API: Save/Update user profile + Auto-assign habits
-app.post('/api/profile', async (req, res) => {
+app.post('/api/profile', authenticateToken, async (req, res) => {
     try {
         const { age, weight, weightUnit, height, heightUnit, dietType, goal, commitment, activityLevel } = req.body;
 
-        // In a real app, we'd get userId from token (authenticateToken)
-        // For this demo, we'll use a fixed user or create one if not exists
-        let user = await User.findOne({ email: 'alex.rivera@example.com' });
+        let user = await User.findById(req.userId);
         if (!user) {
-            user = new User({ fullName: 'Alex Rivera', email: 'alex.rivera@example.com', password: 'password123' });
+            return res.status(404).json({ success: false, message: 'User not found' });
         }
 
         user.profile = {
@@ -388,6 +397,10 @@ app.post('/api/profile', async (req, res) => {
         dashboardData.nutrition.protein.goal = macros.protein;
         dashboardData.nutrition.carbs.goal = macros.carbs;
         dashboardData.nutrition.fats.goal = macros.fats;
+
+        // Update the mocked dashboard total calories left
+        const totalConsumed = (dashboardData.nutrition.protein.current * 4) + (dashboardData.nutrition.carbs.current * 4) + (dashboardData.nutrition.fats.current * 9);
+        dashboardData.nutrition.caloriesLeft = Math.round(dailyCalories - totalConsumed);
 
         res.json({
             success: true,
@@ -571,6 +584,276 @@ function authenticateToken(req, res, next) {
         });
     }
 }
+
+// ==================== NUTRITION LOGS ====================
+
+// Helper: get start and end of a given day in local server time
+function getDayRange(date = new Date()) {
+    const start = new Date(date);
+    start.setHours(0, 0, 0, 0);
+    const end = new Date(date);
+    end.setHours(23, 59, 59, 999);
+    return { start, end };
+}
+
+// Helper: activity level multiplier
+function getActivityMultiplier(activityLevel) {
+    const multipliers = {
+        sedentary: 1.2,
+        light: 1.375,
+        moderate: 1.55,
+        active: 1.725,
+        very_active: 1.9
+    };
+    return multipliers[activityLevel] || 1.55;
+}
+
+// API: Log a food entry for today
+app.post('/api/nutrition-logs', authenticateToken, async (req, res) => {
+    try {
+        const { foodName, mealType, quantity, calories, protein, carbs, fat, fiber, icon } = req.body;
+
+        if (!foodName || !quantity || quantity <= 0) {
+            return res.status(400).json({ success: false, message: 'foodName and a positive quantity are required' });
+        }
+
+        const { start } = getDayRange();
+
+        const log = new NutritionLog({
+            userId: req.userId,
+            date: start,
+            foodName: foodName.trim(),
+            mealType: mealType || 'Lunch',
+            quantity: Number(quantity),
+            calories: Number(calories) || 0,
+            protein: Number(protein) || 0,
+            carbs: Number(carbs) || 0,
+            fat: Number(fat) || 0,
+            fiber: Number(fiber) || 0,
+            icon: icon || 'restaurant'
+        });
+
+        await log.save();
+        res.status(201).json({ success: true, log });
+    } catch (error) {
+        console.error('Error saving nutrition log:', error);
+        res.status(500).json({ success: false, message: 'Server error saving nutrition log' });
+    }
+});
+
+// API: Get today's nutrition logs (aggregated) for the logged-in user
+app.get('/api/nutrition-logs/today', authenticateToken, async (req, res) => {
+    try {
+        const { start, end } = getDayRange();
+        const userId = new mongoose.Types.ObjectId(req.userId);
+
+        // Get individual items
+        const items = await NutritionLog.find({
+            userId: req.userId,
+            date: { $gte: start, $lte: end }
+        }).sort({ createdAt: 1 }).lean();
+
+        console.log('API today logs requested. Range:', { start, end, stringUserId: req.userId, objectId: userId });
+        console.log('Items found count:', items.length);
+
+        // Aggregate totals server-side
+        const [totals] = await NutritionLog.aggregate([
+            {
+                $match: {
+                    userId: userId,
+                    date: { $gte: start, $lte: end }
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    calories: { $sum: { $toDouble: '$calories' } },
+                    protein: { $sum: { $toDouble: '$protein' } },
+                    carbs: { $sum: { $toDouble: '$carbs' } },
+                    fat: { $sum: { $toDouble: '$fat' } },
+                    fiber: { $sum: { $toDouble: '$fiber' } }
+                }
+            }
+        ]);
+
+        const totalsMapped = {
+            calories: Math.round((totals?.calories || 0) * 100) / 100,
+            protein: Math.round((totals?.protein || 0) * 100) / 100,
+            carbs: Math.round((totals?.carbs || 0) * 100) / 100,
+            fat: Math.round((totals?.fat || 0) * 100) / 100,
+            fiber: Math.round((totals?.fiber || 0) * 100) / 100
+        };
+
+        res.json({ success: true, items, totals: totalsMapped });
+    } catch (error) {
+        console.error('Error fetching today logs:', error);
+        res.status(500).json({ success: false, message: 'Server error fetching today logs', error: error.message, stack: error.stack });
+    }
+});
+
+// API: Delete a nutrition log entry
+app.delete('/api/nutrition-logs/:id', authenticateToken, async (req, res) => {
+    try {
+        const log = await NutritionLog.findOneAndDelete({ _id: req.params.id, userId: req.userId });
+        if (!log) return res.status(404).json({ success: false, message: 'Log entry not found' });
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error deleting nutrition log:', error);
+        res.status(500).json({ success: false, message: 'Server error deleting log' });
+    }
+});
+
+// API: Clear ALL of today's nutrition logs for the logged-in user
+app.delete('/api/nutrition-logs/today/all', authenticateToken, async (req, res) => {
+    try {
+        const { start, end } = getDayRange();
+        const result = await NutritionLog.deleteMany({
+            userId: req.userId,
+            date: { $gte: start, $lte: end }
+        });
+        res.json({ success: true, deleted: result.deletedCount });
+    } catch (error) {
+        console.error('Error clearing today logs:', error);
+        res.status(500).json({ success: false, message: 'Server error clearing today logs' });
+    }
+});
+
+// API: Get nutrition log history (all past days, grouped by date, sorted desc)
+app.get('/api/nutrition-logs/history', authenticateToken, async (req, res) => {
+    try {
+        const userId = new mongoose.Types.ObjectId(req.userId);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const history = await NutritionLog.aggregate([
+            {
+                $match: {
+                    userId: userId,
+                    date: { $lt: today }   // Only past days
+                }
+            },
+            {
+                $group: {
+                    _id: '$date',
+                    calories: { $sum: { $toDouble: '$calories' } },
+                    protein: { $sum: { $toDouble: '$protein' } },
+                    carbs: { $sum: { $toDouble: '$carbs' } },
+                    fat: { $sum: { $toDouble: '$fat' } },
+                    fiber: { $sum: { $toDouble: '$fiber' } },
+                    items: {
+                        $push: {
+                            foodName: '$foodName',
+                            mealType: '$mealType',
+                            quantity: '$quantity',
+                            calories: '$calories',
+                            protein: '$protein',
+                            carbs: '$carbs',
+                            fat: '$fat',
+                            fiber: '$fiber',
+                            icon: '$icon'
+                        }
+                    }
+                }
+            },
+            { $sort: { _id: -1 } }   // Most recent first
+        ]);
+
+        // Shape the response neatly
+        const shaped = history.map(h => ({
+            date: h._id,
+            totals: {
+                calories: Math.round(h.calories * 10) / 10,
+                protein: Math.round(h.protein * 10) / 10,
+                carbs: Math.round(h.carbs * 10) / 10,
+                fat: Math.round(h.fat * 10) / 10,
+                fiber: Math.round(h.fiber * 10) / 10
+            },
+            items: h.items
+        }));
+
+        res.json({ success: true, history: shaped });
+    } catch (error) {
+        console.error('Error fetching nutrition history:', error);
+        res.status(500).json({ success: false, message: 'Server error fetching history' });
+    }
+});
+
+// API: Get personalized nutrition goals for the logged-in user
+app.get('/api/nutrition/goals', authenticateToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId);
+        if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+
+        const profile = user.profile || {};
+        const age = Number(profile.age) || 25;
+        const weight = Number(profile.weight) || 70;   // kg
+        const height = Number(profile.height) || 170;  // cm
+        const gender = profile.gender || 'male';
+        const goal = profile.goal || 'maintain';
+        const actLevel = profile.activityLevel || 'moderate';
+
+        // BMR Calculation (Mifflin-St Jeor)
+        let bmr = (10 * weight) + (6.25 * height) - (5 * age);
+        bmr += (gender === 'male') ? 5 : -161;
+
+        // TDEE Calculation
+        const activityFactors = {
+            sedentary: 1.2,
+            light: 1.375,
+            moderate: 1.55,
+            active: 1.725,
+            very_active: 1.9
+        };
+        const factor = activityFactors[actLevel] || 1.2;
+        const tdee = bmr * factor;
+
+        // Goal adjustment
+        let calories = tdee;
+        if (goal === 'lose') calories -= 500;
+        else if (goal === 'gain') calories += 500;
+
+        const minCalories = gender === 'female' ? 1200 : 1500;
+        calories = Math.max(minCalories, Math.round(calories));
+
+        // Macros
+        let proteinMultiplier = 1.6;
+        if (goal === 'lose') proteinMultiplier = 1.8;
+        else if (goal === 'gain') proteinMultiplier = 2.0;
+
+        const protein = Math.round(weight * proteinMultiplier);
+        const fatCalories = calories * 0.25;
+        const fat = Math.round(fatCalories / 9);
+
+        const proteinCalories = protein * 4;
+        const carbsCalories = calories - proteinCalories - fatCalories;
+        const carbs = Math.max(0, Math.round(carbsCalories / 4));
+
+        const fiber = Math.round((calories / 1000) * 14);
+        const water = parseFloat(((weight * 35) / 1000).toFixed(1));
+
+        let message = "Your plan supports maintaining your current weight and energy balance.";
+        if (goal === 'lose') message = "You are on a calorie deficit plan designed for healthy fat loss.";
+        else if (goal === 'gain') message = "You are on a calorie surplus plan to support muscle and weight gain.";
+
+        res.json({
+            success: true,
+            goals: {
+                bmr: Math.round(bmr),
+                tdee: Math.round(tdee),
+                message,
+                calories,
+                protein,
+                carbs,
+                fat,
+                fiber,
+                water
+            }
+        });
+    } catch (error) {
+        console.error('Error calculating nutrition goals:', error);
+        res.status(500).json({ success: false, message: 'Server error calculating goals' });
+    }
+});
 
 // ==================== ERROR HANDLING ====================
 

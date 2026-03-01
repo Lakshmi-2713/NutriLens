@@ -128,81 +128,31 @@
         </header>
 
         <!-- Page Content Container -->
-        <div id="pageContent" class="flex-1">
+        <div id="pageContent" class="flex-1 overflow-y-auto h-[calc(100vh-64px)]">
             <!-- Dashboard Page (Default) -->
-            <div id="dashboardPage" class="page-content p-8 space-y-8">
+            <div id="dashboardPage" class="page-content p-8 space-y-8 min-h-full">
                 <div class="flex items-center justify-between">
                     <div>
                         <h1 id="welcomeMessage" class="text-3xl font-extrabold tracking-tight">Welcome back, Alex!</h1>
                         <p id="completionMessage" class="text-[#6b8072] font-medium mt-1">Your health plan is ready.
                             Track your alignment below.</p>
                     </div>
-                </div>
-
-                <!-- Recommended Plan Section (Top) -->
-                <div id="recommendedPlanSection"
-                    class="bg-primary/5 border border-primary/20 rounded-2xl p-6 space-y-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-primary">verified_user</span>
-                            <h3 class="text-lg font-bold">Recommended Plan</h3>
-                        </div>
-                        <span class="text-[10px] font-black uppercase tracking-widest text-[#6b8072]">Customized for
-                            your goal</span>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Nutrition Targets -->
-                        <div class="space-y-4">
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Nutrition Targets
-                                (Daily)</p>
-                            <div id="planNutritionGrid" class="grid grid-cols-2 gap-4">
-                                <!-- Target values injected here -->
-                                <div class="bg-white dark:bg-[#1A1A1A] p-3 rounded-xl border border-primary/10">
-                                    <p class="text-[10px] font-bold text-[#6b8072] uppercase">Calories</p>
-                                    <p id="plan-target-calories" class="text-lg font-black text-primary">--</p>
-                                </div>
-                                <div class="bg-white dark:bg-[#1A1A1A] p-3 rounded-xl border border-primary/10">
-                                    <p class="text-[10px] font-bold text-[#6b8072] uppercase">Protein</p>
-                                    <p id="plan-target-protein" class="text-lg font-black text-primary">--g</p>
-                                </div>
-                                <div class="bg-white dark:bg-[#1A1A1A] p-3 rounded-xl border border-primary/10">
-                                    <p class="text-[10px] font-bold text-[#6b8072] uppercase">Carbs</p>
-                                    <p id="plan-target-carbs" class="text-lg font-black text-primary">--g</p>
-                                </div>
-                                <div class="bg-white dark:bg-[#1A1A1A] p-3 rounded-xl border border-primary/10">
-                                    <p class="text-[10px] font-bold text-[#6b8072] uppercase">Fat</p>
-                                    <p id="plan-target-fat" class="text-lg font-black text-primary">--g</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Habit List -->
-                        <div class="space-y-4">
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Recommended Habits</p>
-                            <div id="planHabitsList" class="grid grid-cols-1 gap-2">
-                                <!-- Habits injected here -->
-                            </div>
-                        </div>
+                    <div class="flex items-center gap-3">
+                        <button id="resetDashboardBtn"
+                            class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#dee3df] dark:border-white/10 text-[#6b8072] hover:border-red-400 hover:text-red-500 text-xs font-bold transition-all active:scale-95">
+                            <span class="material-symbols-outlined text-base">restart_alt</span>
+                            Reset
+                        </button>
+                        <button id="generateDashboardBtn"
+                            class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-lg shadow-primary/20 hover:bg-secondary transition-all active:scale-95">
+                            <span class="material-symbols-outlined text-base">auto_awesome</span>
+                            Generate Dashboard
+                        </button>
                     </div>
                 </div>
+
 
                 <div class="grid grid-cols-12 gap-6">
-                    <!-- Weekly Calendar -->
-                    <div
-                        class="col-span-12 bg-white dark:bg-[#1A1A1A] p-6 rounded-2xl border border-[#dee3df] dark:border-white/5 shadow-sm">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-bold">Weekly Consistency</h3>
-                            <div class="flex gap-2">
-                                <button class="p-1 rounded-md hover:bg-background-light dark:hover:bg-[#1A1A1A]"><span
-                                        class="material-symbols-outlined">chevron_left</span></button>
-                                <span id="weekRange" class="text-sm font-bold self-center px-2">May 12 - May 18</span>
-                                <button class="p-1 rounded-md hover:bg-background-light dark:hover:bg-[#1A1A1A]"><span
-                                        class="material-symbols-outlined">chevron_right</span></button>
-                            </div>
-                        </div>
-                        <div id="weeklyCalendar" class="grid grid-cols-7 gap-4"></div>
-                    </div>
 
                     <!-- Nutrition Analysis -->
                     <div
@@ -261,80 +211,73 @@
 
                 </div>
 
-                <!-- Analytics Dashboard -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-                    <!-- Macro Distribution Pie Chart -->
-                    <div
-                        class="bg-white dark:bg-[#1A1A1A] p-6 rounded-2xl border border-[#dee3df] dark:border-white/5 shadow-sm hover-lift">
-                        <h3 class="text-xs font-black uppercase tracking-widest text-[#6b8072] mb-4">Macro Split</h3>
-                        <div class="aspect-square relative flex items-center justify-center">
-                            <canvas id="macroPieChart"></canvas>
+                <!-- Nutrient Comparison Bar Chart -->
+                <div
+                    class="bg-white dark:bg-[#1A1A1A] p-6 rounded-3xl border border-[#dee3df] dark:border-white/5 shadow-xl hover-lift overflow-hidden">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-sm font-black uppercase tracking-[0.2em] text-emerald-500 mb-1">Macro
+                                Breakdown</h3>
+                            <p class="text-xl font-black">Nutrient Intake vs Target</p>
+                            <p class="text-xs text-[#6b8072] mt-1">Per-nutrient breakdown comparing actual vs
+                                recommended daily intake</p>
                         </div>
-                    </div>
-
-                    <!-- Weekly Calorie Trend -->
-                    <div
-                        class="lg:col-span-2 bg-white dark:bg-[#1A1A1A] p-6 rounded-2xl border border-[#dee3df] dark:border-white/5 shadow-sm hover-lift">
-                        <h3 class="text-xs font-black uppercase tracking-widest text-[#6b8072] mb-4">Weekly Calorie
-                            Trend</h3>
-                        <div class="h-[200px] relative">
-                            <canvas id="weeklyCalorieChart"></canvas>
-                            <div id="weeklyTrendPlaceholder"
-                                class="hidden absolute inset-0 flex items-center justify-center text-sm text-[#6b8072] font-medium italic">
-                                Not enough data for trend
+                        <div class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest">
+                            <div class="flex items-center gap-2">
+                                <span class="size-3 rounded-sm bg-emerald-500"></span>
+                                <span>Consumed</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="size-3 rounded-sm bg-[#dee3df] dark:bg-white/20"></span>
+                                <span>Target</span>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Hydration Tracker -->
-                    <div
-                        class="bg-white dark:bg-[#1A1A1A] p-6 rounded-2xl border border-[#dee3df] dark:border-white/5 shadow-sm hover-lift">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xs font-black uppercase tracking-widest text-[#6b8072]">Hydration</h3>
-                            <button id="addWaterBtn"
-                                class="size-8 rounded-lg bg-blue-500/10 text-blue-500 hover:bg-blue-500 hover:text-white transition-all flex items-center justify-center active:scale-90 shadow-sm border border-blue-500/10">
-                                <span class="material-symbols-outlined text-sm">add</span>
-                            </button>
-                        </div>
-                        <div class="flex flex-col items-center justify-center py-2">
-                            <div class="relative size-20 flex items-center justify-center mb-3">
-                                <span class="material-symbols-outlined text-3xl text-blue-500 animate-bounce"
-                                    style="animation-duration: 3s">water_drop</span>
-                                <svg class="absolute inset-0 size-20" viewBox="0 0 100 100">
-                                    <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="4"
-                                        class="text-blue-500/10"></circle>
-                                    <circle id="waterProgressRing" cx="50" cy="50" r="45" fill="none"
-                                        stroke="currentColor" stroke-width="4"
-                                        class="text-blue-500 transition-all duration-700" stroke-dasharray="282.7"
-                                        stroke-dashoffset="282.7" stroke-linecap="round"></circle>
-                                </svg>
-                            </div>
-                            <div class="text-center">
-                                <p id="waterIntakeValue" class="text-xl font-black">0.0L</p>
-                                <p class="text-[9px] font-bold text-[#6b8072] uppercase tracking-[0.2em]">Goal: 2.5L</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Protein Consistency Bar Graph -->
-                    <div
-                        class="lg:col-span-4 bg-white dark:bg-[#1A1A1A] p-6 rounded-2xl border border-[#dee3df] dark:border-white/5 shadow-sm hover-lift">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-xs font-black uppercase tracking-widest text-[#6b8072]">Protein Consistency
-                            </h3>
-                            <div class="flex items-center gap-4 text-[9px] font-bold uppercase tracking-[0.15em]">
-                                <div class="flex items-center gap-1.5"><span
-                                        class="size-2 rounded-full bg-primary/40"></span> Goal Range</div>
-                                <div class="flex items-center gap-1.5"><span
-                                        class="size-2 rounded-full bg-primary/10"></span> Actual</div>
-                            </div>
-                        </div>
-                        <div class="h-[140px] relative">
-                            <canvas id="proteinConsistencyChart"></canvas>
-                        </div>
+                    <div class="h-[280px] w-full">
+                        <canvas id="nutrientComparisonChart"></canvas>
                     </div>
                 </div>
+
+                <!-- New Nutrition Delta Graph (Weight Loss Tracking) -->
+                <div
+                    class="col-span-12 bg-white dark:bg-[#1A1A1A] p-6 rounded-3xl border border-[#dee3df] dark:border-white/5 shadow-xl hover-lift overflow-hidden">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h3 class="text-sm font-black uppercase tracking-[0.2em] text-primary mb-1">Weight Loss
+                                Analysis</h3>
+                            <p class="text-2xl font-black">Actual vs Target Intake</p>
+                        </div>
+                        <div class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest">
+                            <div class="flex items-center gap-2">
+                                <span class="size-3 rounded-full bg-primary"></span>
+                                <span>Actual Intake</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="size-3 rounded-full border-2 border-dashed border-[#6b8072]"></span>
+                                <span>Goal Target</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-[350px] w-full relative">
+                        <canvas id="nutritionDeltaChart"></canvas>
+                    </div>
+                    <div class="mt-6 p-4 bg-primary/5 rounded-2xl flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-primary/20 p-2 rounded-xl text-primary">
+                                <span class="material-symbols-outlined">trending_down</span>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-[#6b8072] uppercase">Weekly Delta</p>
+                                <p id="weeklyDeltaValue" class="text-lg font-black">-1,240 kcal</p>
+                            </div>
+                        </div>
+                        <p class="text-xs font-medium text-[#6b8072] max-w-[200px] text-right">You're currently in a
+                            calorie deficit, perfectly aligned with weight loss goals.</p>
+                    </div>
+                </div>
+
             </div>
+
 
             <!-- Profile Setup Page -->
             <div id="profilePage" class="page-content hidden pb-32 max-w-2xl mx-auto w-full py-12 px-6">
@@ -451,15 +394,15 @@
                         <p class="text-[#6b8072] font-medium mt-2 text-lg">Log what you ate today to track your
                             nutrition progress.</p>
                     </div>
-                    <button
+                    <button id="viewHistoryBtn"
                         class="bg-white dark:bg-[#1a261f] border border-[#dee3df] dark:border-[#2d3a31] px-5 py-2.5 rounded-xl flex items-center gap-2 text-sm font-bold shadow-sm hover:bg-background-light transition-all">
                         <span class="material-symbols-outlined text-[20px]">history</span>
                         View History
                     </button>
                 </div>
 
-                <!-- Macro Summary Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <!-- Macro & Hydration Summary Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     <div
                         class="bg-white dark:bg-white/5 p-4 rounded-xl border border-[#cfe7d5] dark:border-white/10 shadow-sm space-y-3">
                         <div class="flex justify-between items-start">
@@ -546,6 +489,34 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Hydration Tracker (Migrated) -->
+                    <div
+                        class="bg-white dark:bg-white/5 p-4 rounded-xl border border-blue-500/20 dark:border-blue-500/10 shadow-sm space-y-3">
+                        <div class="flex justify-between items-start">
+                            <p class="text-blue-500 text-[10px] font-black uppercase tracking-widest">Hydration</p>
+                            <button id="addWaterBtn"
+                                class="size-7 rounded-lg bg-blue-500/10 text-blue-500 hover:bg-blue-500 hover:text-white transition-all flex items-center justify-center active:scale-90">
+                                <span class="material-symbols-outlined text-sm">add</span>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="relative size-12 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-xl text-blue-500">water_drop</span>
+                                <svg class="absolute inset-0 size-12" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="6"
+                                        class="text-blue-500/10"></circle>
+                                    <circle id="waterProgressRing" cx="50" cy="50" r="45" fill="none"
+                                        stroke="currentColor" stroke-width="6"
+                                        class="text-blue-500 transition-all duration-700" stroke-dasharray="282.7"
+                                        stroke-dashoffset="282.7" stroke-linecap="round"></circle>
+                                </svg>
+                            </div>
+                            <div>
+                                <p id="waterIntakeValue" class="text-lg font-black">0.0L</p>
+                                <p class="text-[9px] font-bold text-[#6b8072] uppercase tracking-widest">Goal: 2.5L</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
@@ -615,6 +586,53 @@
                                     </div>
                                 </div>
 
+                                <!-- Dynamic Nutrition Preview -->
+                                <div id="foodPreviewContainer"
+                                    class="hidden bg-primary/5 border border-primary/20 rounded-xl p-4 mt-6">
+                                    <div class="flex items-center justify-between mb-3 border-b border-primary/10 pb-2">
+                                        <div class="flex items-center gap-2">
+                                            <span
+                                                class="material-symbols-outlined text-primary text-sm">analytics</span>
+                                            <h4
+                                                class="text-[#0d1b11] dark:text-white text-xs font-black uppercase tracking-widest">
+                                                Nutrition Preview</h4>
+                                        </div>
+                                        <span id="preview-cal"
+                                            class="bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full">0
+                                            kcal</span>
+                                    </div>
+                                    <div class="grid grid-cols-4 gap-2 text-center">
+                                        <div class="bg-blue-500/10 rounded-lg p-2">
+                                            <p
+                                                class="text-[9px] font-black uppercase text-blue-500 tracking-widest mb-0.5">
+                                                Protein</p>
+                                            <p id="preview-protein"
+                                                class="text-xs font-black text-blue-600 dark:text-blue-400">0g</p>
+                                        </div>
+                                        <div class="bg-yellow-500/10 rounded-lg p-2">
+                                            <p
+                                                class="text-[9px] font-black uppercase text-yellow-500 tracking-widest mb-0.5">
+                                                Carbs</p>
+                                            <p id="preview-carbs"
+                                                class="text-xs font-black text-yellow-600 dark:text-yellow-400">0g</p>
+                                        </div>
+                                        <div class="bg-orange-500/10 rounded-lg p-2">
+                                            <p
+                                                class="text-[9px] font-black uppercase text-orange-500 tracking-widest mb-0.5">
+                                                Fat</p>
+                                            <p id="preview-fat"
+                                                class="text-xs font-black text-orange-600 dark:text-orange-400">0g</p>
+                                        </div>
+                                        <div class="bg-emerald-500/10 rounded-lg p-2">
+                                            <p
+                                                class="text-[9px] font-black uppercase text-emerald-500 tracking-widest mb-0.5">
+                                                Fiber</p>
+                                            <p id="preview-fiber"
+                                                class="text-xs font-black text-emerald-600 dark:text-emerald-400">0g</p>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <button id="addFoodBtn"
                                     class="w-full py-4 mt-6 bg-primary text-[#0d1b11] font-black text-lg rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
                                     <span class="material-symbols-outlined">add</span>
@@ -641,33 +659,151 @@
                         </div>
                     </div>
 
-                    <!-- Right: Today's Food Log -->
+                    <!-- Right: Two stacked sections -->
                     <div class="lg:col-span-7 space-y-6">
+
+                        <!-- Section 1: Today's Food Intake -->
                         <div
-                            class="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-[#dee3df] dark:border-white/5 shadow-sm overflow-hidden flex flex-col min-h-[500px]">
+                            class="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-[#dee3df] dark:border-white/5 shadow-sm overflow-hidden flex flex-col">
                             <div
-                                class="px-8 py-6 border-b border-[#dee3df] dark:border-white/5 flex justify-between items-center bg-background-light/50 dark:bg-white/5">
-                                <h3 class="text-[#0d1b11] dark:text-white text-xl font-black">Today's Intake</h3>
+                                class="px-6 py-4 border-b border-[#dee3df] dark:border-white/5 flex justify-between items-center bg-background-light/50 dark:bg-white/5">
                                 <div class="flex items-center gap-2">
-                                    <span class="text-[#6b8072] text-[10px] font-black uppercase tracking-widest">Total
-                                        Energy</span>
-                                    <span id="logTotalCalories"
-                                        class="bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-black">0
-                                        kcal</span>
+                                    <span class="material-symbols-outlined text-primary text-lg">today</span>
+                                    <h3 class="text-[#0d1b11] dark:text-white text-base font-black">Today's Food Intake
+                                    </h3>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="text-[#6b8072] text-[10px] font-black uppercase tracking-widest">Total
+                                            Energy</span>
+                                        <span id="logTotalCalories"
+                                            class="bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-black">0
+                                            kcal</span>
+                                    </div>
+                                    <button id="clearTodayLogsBtn"
+                                        class="text-xs text-red-500 hover:text-red-700 font-bold px-2 py-1 rounded-lg border border-red-500/20 hover:bg-red-500/10 transition-colors flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-sm">delete_sweep</span>
+                                        Clear All
+                                    </button>
                                 </div>
                             </div>
 
-                            <div id="nutritionLogContainer" class="flex-1 p-8 space-y-10 overflow-y-auto">
-                                <!-- Grouped meals will be rendered here -->
-                                <div
-                                    class="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-40 py-20">
-                                    <span class="material-symbols-outlined text-6xl">no_meals</span>
+                            <!-- Loading state -->
+                            <div id="todayLogLoading"
+                                class="hidden px-6 py-8 flex justify-center items-center gap-3 text-[#6b8072]">
+                                <span class="material-symbols-outlined animate-spin text-primary">refresh</span>
+                                <span class="text-sm font-semibold">Loading today's logs...</span>
+                            </div>
+
+                            <!-- Totals summary row -->
+                            <div id="todayTotalsRow" class="hidden px-6 py-3 bg-primary/5 border-b border-primary/10">
+                                <div class="grid grid-cols-5 gap-2 text-center">
                                     <div>
-                                        <p class="font-bold text-lg">No food logged today</p>
+                                        <p class="text-[9px] font-black uppercase text-[#6b8072] tracking-widest">Cal
+                                        </p>
+                                        <p id="totals-cal" class="text-sm font-black text-primary">0</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] font-black uppercase text-[#6b8072] tracking-widest">
+                                            Protein</p>
+                                        <p id="totals-protein" class="text-sm font-black text-blue-500">0g</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] font-black uppercase text-[#6b8072] tracking-widest">Carbs
+                                        </p>
+                                        <p id="totals-carbs" class="text-sm font-black text-yellow-500">0g</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] font-black uppercase text-[#6b8072] tracking-widest">Fat
+                                        </p>
+                                        <p id="totals-fat" class="text-sm font-black text-orange-500">0g</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] font-black uppercase text-[#6b8072] tracking-widest">Fiber
+                                        </p>
+                                        <p id="totals-fiber" class="text-sm font-black text-emerald-500">0g</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="nutritionLogContainer" class="flex-1 p-6 space-y-6 overflow-y-auto max-h-[320px]">
+                                <div
+                                    class="flex flex-col items-center justify-center text-center space-y-4 opacity-40 py-12">
+                                    <span class="material-symbols-outlined text-5xl">no_meals</span>
+                                    <div>
+                                        <p class="font-bold text-base">No food logged today</p>
                                         <p class="text-sm">Start by adding your first meal of the day.</p>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Section 2: Recommended To Take -->
+                        <div
+                            class="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-[#dee3df] dark:border-white/5 shadow-sm overflow-hidden">
+                            <div
+                                class="px-6 py-4 border-b border-[#dee3df] dark:border-white/5 flex justify-between items-center bg-background-light/50 dark:bg-white/5">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-emerald-500 text-lg">recommend</span>
+                                    <h3 class="text-[#0d1b11] dark:text-white text-base font-black">Recommended To Take
+                                    </h3>
+                                </div>
+                                <span class="text-[10px] font-black uppercase tracking-widest text-[#6b8072]">Remaining
+                                    Today</span>
+                            </div>
+
+                            <!-- Loading state -->
+                            <div id="recommendedLoading"
+                                class="hidden px-6 py-6 flex justify-center items-center gap-3 text-[#6b8072]">
+                                <span class="material-symbols-outlined animate-spin text-emerald-500">refresh</span>
+                                <span class="text-sm font-semibold">Calculating recommendations...</span>
+                            </div>
+
+                            <div id="recommendedToTakeContainer" class="p-6 space-y-5">
+                                <div id="remainingNutrientsRow" class="grid grid-cols-5 gap-3">
+                                    <!-- Dynamically filled by JS -->
+                                </div>
+                                <div>
+                                    <p class="text-xs font-black uppercase tracking-widest text-[#6b8072] mb-3">Smart
+                                        Food Picks</p>
+                                    <div id="smartRecommendationsList" class="space-y-2">
+                                        <div
+                                            class="flex items-center gap-3 text-[#6b8072] opacity-50 text-sm py-4 justify-center">
+                                            <span class="material-symbols-outlined">lightbulb</span>
+                                            <span class="font-medium">Log some food to see personalized
+                                                recommendations</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Modal -->
+            <div id="historyModal"
+                class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] hidden items-center justify-center p-4"
+                style="display:none">
+                <div
+                    class="bg-white dark:bg-[#1A1A1A] rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col border border-[#dee3df] dark:border-white/10">
+                    <div
+                        class="flex items-center justify-between px-8 py-5 border-b border-[#dee3df] dark:border-white/10">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">history</span>
+                            <h3 class="text-lg font-black">Nutrition History</h3>
+                        </div>
+                        <button id="closeHistoryModal"
+                            class="size-9 rounded-xl hover:bg-background-light dark:hover:bg-white/5 flex items-center justify-center text-[#6b8072] hover:text-primary transition-all">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <div id="historyModalBody" class="flex-1 overflow-y-auto p-6 space-y-4">
+                        <div class="flex justify-center items-center gap-3 text-[#6b8072] py-12">
+                            <span class="material-symbols-outlined text-primary">history</span>
+                            <span class="text-sm font-semibold">Past nutrition logs will appear here</span>
                         </div>
                     </div>
                 </div>
@@ -793,10 +929,10 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/home.js"></script>
-    <script src="/js/goalEngine.js"></script>
-    <script src="/js/comparisonEngine.js"></script>
-    <script src="/js/dashboard.js"></script>
+    <script src="/js/home.js?v=2"></script>
+    <script src="/js/goalEngine.js?v=2"></script>
+    <script src="/js/comparisonEngine.js?v=2"></script>
+    <script src="js/dashboard.js?v=2"></script>
 </body>
 
 </html>
